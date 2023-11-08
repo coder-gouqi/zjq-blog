@@ -18,12 +18,12 @@ public class Comment implements Serializable {
     /**
      * 评论文章id
      */
-    private String essay_id;
+    private String essayId;
 
     /**
      * 评论用户id
      */
-    private String user_id;
+    private String userId;
 
     /**
      * 评论内容
@@ -33,12 +33,12 @@ public class Comment implements Serializable {
     /**
      * 回复评论id
      */
-    private String reply_to;
+    private String replyTo;
 
     /**
      * 逻辑删除
      */
-    private Integer is_delete;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 

@@ -5,12 +5,13 @@
 <mapper namespace="com.cuit.zjq.mapper.FavourMapper">
 
     <resultMap id="BaseResultMap" type="com.cuit.zjq.model.domain.Favour">
-            <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="essay_id" column="essay_id" jdbcType="VARCHAR"/>
-            <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="essayId" column="essay_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,essay_id,user_id
+        id
+        ,essay_id,user_id
     </sql>
 </mapper>

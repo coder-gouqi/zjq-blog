@@ -18,7 +18,7 @@ public class Essay implements Serializable {
     /**
      * 用户id
      */
-    private String user_id;
+    private String userId;
 
     /**
      * 文章标题
@@ -38,22 +38,22 @@ public class Essay implements Serializable {
     /**
      * 收藏数
      */
-    private Integer favour_num;
+    private Integer favourNum;
 
     /**
      * 点赞数
      */
-    private Integer thumb_num;
+    private Integer thumbNum;
 
     /**
      * 评论数
      */
-    private Integer comment_num;
+    private Integer commentNum;
 
     /**
      * 转发数
      */
-    private Integer forward_num;
+    private Integer forwardNum;
 
     /**
      * 文章置顶
@@ -63,7 +63,7 @@ public class Essay implements Serializable {
     /**
      * 逻辑删除
      */
-    private Integer is_delete;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 

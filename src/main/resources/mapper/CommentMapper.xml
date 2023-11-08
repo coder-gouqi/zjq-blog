@@ -5,16 +5,51 @@
 <mapper namespace="com.cuit.zjq.mapper.CommentMapper">
 
     <resultMap id="BaseResultMap" type="com.cuit.zjq.model.domain.Comment">
-            <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="essay_id" column="essay_id" jdbcType="VARCHAR"/>
-            <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="reply_to" column="reply_to" jdbcType="VARCHAR"/>
-            <result property="is_delete" column="is_delete" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="essayId" column="essay_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="replyTo" column="reply_to" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,essay_id,user_id,
+        id
+        ,essay_id,user_id,
         content,reply_to,is_delete
     </sql>
+
+    <insert id="insert" parameterType="object" >
+        insert into comment (id, essay_id, user_id, content, reply_to, is_delete)
+        values (#{id}, #{essayId}, #{userId}, #{content}, #{replyTo}, #{isDelete})
+    </insert>
+
+    <select id="select" resultType="com.cuit.zjq.model.domain.Comment">
+        select *
+        from comment
+        where is_delete = 0
+    </select>
+
+    <select id="selectById" resultType="com.cuit.zjq.model.domain.Comment">
+        select *
+        from comment
+        where id = #{id}
+          and is_delete = 0
+    </select>
+
+    <update id="updateById">
+        update comment
+        set essay_id  = #{essayId},
+            user_id   = #{userId},
+            content   = #{content},
+            repy_to   = #{repyTo},
+            is_delete = #{isDelete}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="object">
+        update comment
+        set is_delete = 1
+        where id = #{id}
+    </delete>
 </mapper>

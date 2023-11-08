@@ -18,17 +18,17 @@ public class User implements Serializable {
     /**
      * 用户账号
      */
-    private String user_account;
+    private String userAccount;
 
     /**
      * 用户密码
      */
-    private String user_password;
+    private String userPassword;
 
     /**
      * 用户角色
      */
-    private String user_role;
+    private String userRole;
 
     /**
      * 邮箱
@@ -48,7 +48,7 @@ public class User implements Serializable {
     /**
      * 逻辑删除
      */
-    private Integer is_delete;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 

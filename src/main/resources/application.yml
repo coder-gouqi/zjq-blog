@@ -2,6 +2,15 @@ server:
   port: 8080
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/zjq-blog
     username: root
     password: 123456
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #下划线转驼峰
+    map-underscore-to-camel-case: true
+# 接口文档
+knife4j:
+  enable: true

@@ -18,12 +18,12 @@ public class Follow implements Serializable {
     /**
      * 关注者id
      */
-    private String follow_id;
+    private String followId;
 
     /**
      * 被关注者id
      */
-    private String follower_id;
+    private String followerId;
 
     private static final long serialVersionUID = 1L;
 

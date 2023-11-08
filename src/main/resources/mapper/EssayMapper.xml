@@ -5,21 +5,22 @@
 <mapper namespace="com.cuit.zjq.mapper.EssayMapper">
 
     <resultMap id="BaseResultMap" type="com.cuit.zjq.model.domain.Essay">
-            <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="tags" column="tags" jdbcType="VARCHAR"/>
-            <result property="favour_num" column="favour_num" jdbcType="INTEGER"/>
-            <result property="thumb_num" column="thumb_num" jdbcType="INTEGER"/>
-            <result property="comment_num" column="comment_num" jdbcType="INTEGER"/>
-            <result property="forward_num" column="forward_num" jdbcType="INTEGER"/>
-            <result property="top" column="top" jdbcType="TINYINT"/>
-            <result property="is_delete" column="is_delete" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="favourNum" column="favour_num" jdbcType="INTEGER"/>
+        <result property="thumbNum" column="thumb_num" jdbcType="INTEGER"/>
+        <result property="commentNum" column="comment_num" jdbcType="INTEGER"/>
+        <result property="forwardNum" column="forward_num" jdbcType="INTEGER"/>
+        <result property="top" column="top" jdbcType="TINYINT"/>
+        <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,title,
+        id
+        ,user_id,title,
         content,tags,favour_num,
         thumb_num,comment_num,forward_num,
         top,is_delete
