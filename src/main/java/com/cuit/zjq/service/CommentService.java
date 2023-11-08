@@ -18,7 +18,7 @@ public interface CommentService {
      *
      * @return
      */
-    String commentAdd(CommentAddRequest commentAddRequest);
+    Boolean commentAdd(CommentAddRequest commentAddRequest);
 
     /**
      * 修改评论

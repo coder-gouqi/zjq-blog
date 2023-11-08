@@ -19,7 +19,7 @@
         content,reply_to,is_delete
     </sql>
 
-    <insert id="insert" parameterType="object" >
+    <insert id="insert" parameterType="object">
         insert into comment (id, essay_id, user_id, content, reply_to, is_delete)
         values (#{id}, #{essayId}, #{userId}, #{content}, #{replyTo}, #{isDelete})
     </insert>
@@ -27,14 +27,23 @@
     <select id="select" resultType="com.cuit.zjq.model.domain.Comment">
         select *
         from comment
-        where is_delete = 0
+        where is_delete=0
+        <if test="essayId != null and essayId!=''">
+            and essay_id=#{essayId}
+        </if>
+        <if test="userId != null and userId!=''">
+            and user_id=#{userId}
+        </if>
+        <if test="replyTo != null and replyTo!=''">
+            and reply_to=#{replyTo}
+        </if>
     </select>
 
     <select id="selectById" resultType="com.cuit.zjq.model.domain.Comment">
         select *
         from comment
-        where id = #{id}
-          and is_delete = 0
+        where is_delete = 0
+          and id = #{id}
     </select>
 
     <update id="updateById">
@@ -42,7 +51,7 @@
         set essay_id  = #{essayId},
             user_id   = #{userId},
             content   = #{content},
-            repy_to   = #{repyTo},
+            reply_to  = #{replyTo},
             is_delete = #{isDelete}
         where id = #{id}
     </update>

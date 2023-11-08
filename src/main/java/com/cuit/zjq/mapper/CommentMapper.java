@@ -2,6 +2,7 @@ package com.cuit.zjq.mapper;
 
 import com.cuit.zjq.common.DeleteRequest;
 import com.cuit.zjq.model.domain.Comment;
+import com.cuit.zjq.model.dto.comment.CommentQueryRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface CommentMapper {
 
     int insert(Comment comment);
 
-    List<Comment> select();
+    List<Comment> select(CommentQueryRequest commentQueryRequest);
 
     Comment selectById(String id);
 

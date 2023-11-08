@@ -26,27 +26,27 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public String commentAdd(CommentAddRequest commentAddRequest) {
+    public Boolean commentAdd(CommentAddRequest commentAddRequest) {
         Comment comment = new Comment();
-        BeanUtil.copyProperties(comment, commentAddRequest);
+        BeanUtil.copyProperties(commentAddRequest, comment);
         String id = UUID.randomUUID().toString().replace("-", "");
         comment.setId(id);
         comment.setIsDelete(0);
-        commentMapper.insert(comment);
-        return null;
+        int insert = commentMapper.insert(comment);
+        return insert > 0;
     }
 
     @Override
     public Boolean commentUpdate(CommentUpdateRequest commentUpdateRequest) {
         Comment comment = commentMapper.selectById(commentUpdateRequest.getId());
-        BeanUtil.copyProperties(comment, commentUpdateRequest);
+        BeanUtil.copyProperties(commentUpdateRequest, comment);
         int result = commentMapper.updateById(comment);
         return result > 0;
     }
 
     @Override
     public List<Comment> commentSelect(CommentQueryRequest commentQueryRequest) {
-        List<Comment> commentList = commentMapper.select();
+        List<Comment> commentList = commentMapper.select(commentQueryRequest);
         return commentList;
     }
 
