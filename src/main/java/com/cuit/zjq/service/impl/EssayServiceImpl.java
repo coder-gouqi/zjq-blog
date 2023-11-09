@@ -30,6 +30,10 @@ public class EssayServiceImpl implements EssayService {
         BeanUtil.copyProperties(essayAddRequest, essay);
         String id = UUID.randomUUID().toString().replace("-", "");
         essay.setId(id);
+        essay.setFavourNum(0);
+        essay.setThumbNum(0);
+        essay.setCommentNum(0);
+        essay.setForwardNum(0);
         essay.setIsDelete(0);
         int insert = essayMapper.insert(essay);
         return insert > 0;

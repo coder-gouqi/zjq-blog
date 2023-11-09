@@ -40,10 +40,13 @@
             and user_id=#{userId}
         </if>
         <if test="title != null and title!=''">
-            and title like '%'+#{title}+'%'
+            and title like '%${title}%'
         </if>
         <if test="content != null and content!=''">
-            and content like '%'+#{content}+'%'
+            and content like '%${content}%'
+        </if>
+        <if test="tags != null and tags!=''">
+            and tags like '%${tags}%'
         </if>
     </select>
 
@@ -60,11 +63,11 @@
             title     = #{title},
             content   = #{content},
             tags   = #{tags},
-            favourNum   = #{favourNum},
-            thumbNum   = #{thumbNum},
-            commentNum   = #{commentNum},
-            favourNum   = #{favourNum},
-            forwardNum   = #{forwardNum},
+            favour_num   = #{favourNum},
+            thumb_num   = #{thumbNum},
+            comment_num   = #{commentNum},
+            favour_num   = #{favourNum},
+            forward_num   = #{forwardNum},
             top   = #{top},
             is_delete = #{isDelete}
         where id = #{id}
