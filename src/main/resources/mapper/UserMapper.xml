@@ -20,4 +20,37 @@
         user_role,email,phone,
         hobby,is_delete
     </sql>
+    <insert id="insert" parameterType="object">
+        insert into user (id, user_account, user_password, user_role, email, phone, hobby, is_delete)
+        values (#{id}, #{userAccount}, #{userPassword}, #{userRole}, #{email}, #{phone}, #{hobby}, #{isDelete})
+    </insert>
+
+    <select id="select" resultType="com.cuit.zjq.model.domain.User">
+        select *
+        from user
+        where is_delete=0
+    </select>
+
+    <select id="selectById" resultType="com.cuit.zjq.model.domain.User">
+        select *
+        from user
+        where is_delete = 0
+          and id = #{id}
+    </select>
+
+    <update id="updateById">
+        update user
+        set user_password = #{userPassword},
+            email         = #{email},
+            phone         = #{phone},
+            hobby         = #{hobby}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="object">
+        update user
+        set is_delete = 1
+        where id = #{id}
+    </delete>
+
 </mapper>

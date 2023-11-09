@@ -2,6 +2,6 @@ package com.cuit.zjq.common;
 
 public class Constant {
 
-//    public static final Integer delete = 0;
+    public static final String USER_LOGIN_STATE = "USER_LOGIN_STATE";
 
 }
