@@ -14,7 +14,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-
     @Select("select * from user where is_delete=0 and user_account=#{userAccount} and user_password=#{userPassword} ;")
     User userLogin(String userAccount, String userPassword);
 
