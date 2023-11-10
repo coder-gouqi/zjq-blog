@@ -1,6 +1,7 @@
 package com.cuit.zjq.mapper;
 
 
+import com.cuit.zjq.model.dto.follow.FollowRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,6 +10,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface FollowMapper {
 
+    int insert(FollowRequest followRequest);
+
+    int delete(FollowRequest followRequest);
 }
 
 

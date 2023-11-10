@@ -1,5 +1,6 @@
 package com.cuit.zjq.mapper;
 
+import com.cuit.zjq.common.InteractionRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -8,6 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ForwardMapper {
 
+    int insert(InteractionRequest interactionRequest);
+
+    int delete(InteractionRequest interactionRequest);
 }
 
 

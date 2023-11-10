@@ -14,4 +14,14 @@
         id
         ,essay_id,user_id
     </sql>
+
+    <insert id="insert" parameterType="object">
+        insert into favour (id, essay_id, user_id)
+        values (#{id}, #{essayId}, #{userId})
+    </insert>
+
+    <delete id="delete" parameterType="object">
+        delete from favour where essay_id=#{essayId} and user_id=#{userId}
+    </delete>
+
 </mapper>
