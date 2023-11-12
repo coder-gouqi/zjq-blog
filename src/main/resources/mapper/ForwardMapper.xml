@@ -20,6 +20,15 @@
         values (#{id}, #{essayId}, #{userId})
     </insert>
 
+    <select id="select" resultType="com.cuit.zjq.model.domain.Forward">
+        select *
+        from forward
+        where
+        <if test="essayId != null and essayId!=''">
+            essay_id=#{essayId}
+        </if>
+    </select>
+    
     <delete id="delete" parameterType="object">
         delete
         from forward

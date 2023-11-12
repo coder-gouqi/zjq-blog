@@ -1,11 +1,10 @@
 package com.cuit.zjq.job;
 
 import com.cuit.zjq.common.InteractionRequest;
-import com.cuit.zjq.mapper.CommentMapper;
 import com.cuit.zjq.mapper.EssayMapper;
-import com.cuit.zjq.mapper.ThumbMapper;
+import com.cuit.zjq.mapper.ForwardMapper;
 import com.cuit.zjq.model.domain.Essay;
-import com.cuit.zjq.model.domain.Thumb;
+import com.cuit.zjq.model.domain.Forward;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,21 +14,21 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 点赞定时任务
+ * 转发定时任务
  */
 @Component
 @EnableScheduling
-public class ThumbJob {
+public class ForwardJob {
 
     @Resource
     private EssayMapper essayMapper;
 
     @Resource
-    private ThumbMapper thumbMapper;
+    private ForwardMapper forwardMapper;
 
-    //每十分钟执行同步点赞数
+    //每十分钟执行同步转发数
     @Scheduled(cron = "0 */1 * * * ?")
-    public void synchronizeThumb() {
+    public void synchronizeForward() {
         //查询所有文章
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
         List<Essay> essayList = essayMapper.select(essayQueryRequest);
@@ -38,13 +37,13 @@ public class ThumbJob {
             String id = essay.getId();
             InteractionRequest interactionRequest = new InteractionRequest();
             interactionRequest.setEssayId(id);
-            List<Thumb> thumbList = thumbMapper.select(interactionRequest);
-            int thumbCount = thumbList.size();
+            List<Forward> forwardList = forwardMapper.select(interactionRequest);
+            int forwardCount = forwardList.size();
             Essay essayForUpdate = essayMapper.selectById(id);
-            essayForUpdate.setThumbNum(thumbCount);
+            essayForUpdate.setForwardNum(forwardCount);
             int updateById = essayMapper.updateById(essayForUpdate);
             if (updateById > 0) {
-                System.out.println("更新文章" + id + "点赞数成功");
+                System.out.println("更新文章" + id + "转发数成功");
             }
         }
     }
