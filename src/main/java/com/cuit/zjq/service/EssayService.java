@@ -14,26 +14,26 @@ import java.util.List;
  */
 public interface EssayService {
     /**
-     * 发布评论
+     * 发布文章
      *
      * @return
      */
     Boolean essayAdd(EssayAddRequest essayAddRequest);
 
     /**
-     * 修改评论
+     * 修改文章
      *
      * @return
      */
     Boolean essayUpdate(EssayUpdateRequest essayUpdateRequest);
 
     /**
-     * 查看评论
+     * 查看文章
      */
     List<Essay> essaySelect(EssayQueryRequest essayQueryRequest);
 
     /**
-     * 删除评论
+     * 删除文章
      */
     Boolean essayDelete(DeleteRequest deleteRequest);
 }

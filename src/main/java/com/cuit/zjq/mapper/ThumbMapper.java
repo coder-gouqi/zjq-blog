@@ -1,9 +1,7 @@
 package com.cuit.zjq.mapper;
 
-import com.cuit.zjq.common.InteractionRequest;
-import com.cuit.zjq.model.domain.Essay;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.model.domain.Thumb;
-import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,11 +12,11 @@ import java.util.List;
 @Mapper
 public interface ThumbMapper {
 
-    int insert(InteractionRequest interactionRequest);
+    int insert(InteractionUpdateRequest interactionRequest);
 
-    List<Thumb> select(InteractionRequest interactionRequest);
+    List<Thumb> select(InteractionUpdateRequest interactionRequest);
 
-    int delete(InteractionRequest interactionRequest);
+    int delete(InteractionUpdateRequest interactionRequest);
 }
 
 

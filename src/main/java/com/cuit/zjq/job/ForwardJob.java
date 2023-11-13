@@ -1,6 +1,6 @@
 package com.cuit.zjq.job;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.mapper.EssayMapper;
 import com.cuit.zjq.mapper.ForwardMapper;
 import com.cuit.zjq.model.domain.Essay;
@@ -27,7 +27,7 @@ public class ForwardJob {
     private ForwardMapper forwardMapper;
 
     //每十分钟执行同步转发数
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void synchronizeForward() {
         //查询所有文章
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
@@ -35,7 +35,7 @@ public class ForwardJob {
         //遍历所有id
         for (Essay essay : essayList) {
             String id = essay.getId();
-            InteractionRequest interactionRequest = new InteractionRequest();
+            InteractionUpdateRequest interactionRequest = new InteractionUpdateRequest();
             interactionRequest.setEssayId(id);
             List<Forward> forwardList = forwardMapper.select(interactionRequest);
             int forwardCount = forwardList.size();

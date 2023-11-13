@@ -1,7 +1,7 @@
 package com.cuit.zjq.service;
 
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 
 /**
  * @description 针对表【favour】的数据库操作Service
@@ -13,5 +13,5 @@ public interface FavourService {
      *
      * @return
      */
-    Boolean favourUpdate(InteractionRequest interactionRequest);
+    Boolean favourUpdate(InteractionUpdateRequest interactionRequest);
 }

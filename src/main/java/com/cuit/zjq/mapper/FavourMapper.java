@@ -1,7 +1,10 @@
 package com.cuit.zjq.mapper;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
+import com.cuit.zjq.model.domain.Favour;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @description 针对表【favour】的数据库操作Mapper
@@ -9,9 +12,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface FavourMapper {
 
-    int insert(InteractionRequest interactionRequest);
+    int insert(InteractionUpdateRequest interactionRequest);
 
-    int delete(InteractionRequest interactionRequest);
+    List<Favour> select(InteractionUpdateRequest interactionRequest);
+
+    int delete(InteractionUpdateRequest interactionRequest);
 }
 
 

@@ -20,6 +20,18 @@
         values (#{id}, #{followId}, #{followerId})
     </insert>
 
+    <select id="select" resultType="com.cuit.zjq.model.domain.Follow">
+        select *
+        from follow
+        where 1=1
+        <if test="followId != null and followId!=''">
+            and follow_id=#{followId}
+        </if>
+        <if test="followerId != null and followerId!=''">
+            and follower_id=#{followerId}
+        </if>
+    </select>
+
     <delete id="delete" parameterType="object">
         delete
         from follow

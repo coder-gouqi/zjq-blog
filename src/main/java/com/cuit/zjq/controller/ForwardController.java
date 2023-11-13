@@ -1,6 +1,6 @@
 package com.cuit.zjq.controller;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.common.StatusResponse;
 import com.cuit.zjq.common.StatusResponseCode;
 import com.cuit.zjq.service.ForwardService;
@@ -19,9 +19,9 @@ public class ForwardController {
     private ForwardService forwardService;
 
     @PostMapping("/update")
-    public StatusResponse doForward(@RequestBody InteractionRequest interactionRequest) {
+    public StatusResponse doForward(@RequestBody InteractionUpdateRequest interactionUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
-        Boolean result = forwardService.forwardUpdate(interactionRequest);
+        Boolean result = forwardService.forwardUpdate(interactionUpdateRequest);
         statusResponse.setData(result);
         if (result) {
             statusResponse.setMsgAndCode(StatusResponseCode.SUCCESS);

@@ -1,24 +1,23 @@
-package com.cuit.zjq.common;
+package com.cuit.zjq.model.dto.follow;
 
 import lombok.Data;
 
 @Data
-public class InteractionRequest {
-
+public class FollowUpdateRequest {
     /**
      * id
      */
     private String id;
 
     /**
-     * 文章id
+     * 关注者id
      */
-    private String essayId;
+    private String followId;
 
     /**
-     * 用户id
+     * 被关注者id
      */
-    private String userId;
+    private String followerId;
 
     /**
      *  互动类型，操作0，取消操作1

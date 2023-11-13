@@ -1,6 +1,6 @@
 package com.cuit.zjq.service.impl;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.mapper.ForwardMapper;
 import com.cuit.zjq.service.ForwardService;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ForwardServiceImpl implements ForwardService {
     private ForwardMapper forwardMapper;
 
     @Override
-    public Boolean forwardUpdate(InteractionRequest interactionRequest) {
+    public Boolean forwardUpdate(InteractionUpdateRequest interactionRequest) {
         int result = 0;
         if (interactionRequest.getType() == OPERATE) {
             String id = UUID.randomUUID().toString().replace("-", "");

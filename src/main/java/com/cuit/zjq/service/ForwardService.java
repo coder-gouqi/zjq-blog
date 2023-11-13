@@ -1,7 +1,7 @@
 package com.cuit.zjq.service;
 
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 
 /**
  * @description 针对表【forward】的数据库操作Service
@@ -12,5 +12,5 @@ public interface ForwardService {
      *
      * @return
      */
-    Boolean forwardUpdate(InteractionRequest interactionRequest);
+    Boolean forwardUpdate(InteractionUpdateRequest interactionRequest);
 }

@@ -20,6 +20,15 @@
         values (#{id}, #{essayId}, #{userId})
     </insert>
 
+    <select id="select" resultType="com.cuit.zjq.model.domain.Favour">
+        select *
+        from favour
+        where
+        <if test="essayId != null and essayId!=''">
+            essay_id=#{essayId}
+        </if>
+    </select>
+
     <delete id="delete" parameterType="object">
         delete from favour where essay_id=#{essayId} and user_id=#{userId}
     </delete>

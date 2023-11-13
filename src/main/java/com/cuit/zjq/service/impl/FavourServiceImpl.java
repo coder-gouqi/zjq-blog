@@ -1,6 +1,6 @@
 package com.cuit.zjq.service.impl;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.mapper.FavourMapper;
 import com.cuit.zjq.service.FavourService;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class FavourServiceImpl implements FavourService {
     private FavourMapper favourMapper;
 
     @Override
-    public Boolean favourUpdate(InteractionRequest interactionRequest) {
+    public Boolean favourUpdate(InteractionUpdateRequest interactionRequest) {
         int result = 0;
         if (interactionRequest.getType() == OPERATE) {
             String id = UUID.randomUUID().toString().replace("-", "");

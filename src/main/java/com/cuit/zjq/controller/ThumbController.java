@@ -1,6 +1,6 @@
 package com.cuit.zjq.controller;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.common.StatusResponse;
 import com.cuit.zjq.common.StatusResponseCode;
 import com.cuit.zjq.service.ThumbService;
@@ -19,9 +19,9 @@ public class ThumbController {
     private ThumbService thumbService;
 
     @PostMapping("/update")
-    public StatusResponse doThumb(@RequestBody InteractionRequest interactionRequest) {
+    public StatusResponse doThumb(@RequestBody InteractionUpdateRequest interactionUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
-        Boolean result = thumbService.thumbUpdate(interactionRequest);
+        Boolean result = thumbService.thumbUpdate(interactionUpdateRequest);
         statusResponse.setData(result);
         if (result) {
             statusResponse.setMsgAndCode(StatusResponseCode.SUCCESS);

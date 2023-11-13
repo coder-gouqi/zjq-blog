@@ -1,6 +1,6 @@
 package com.cuit.zjq.service.impl;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.mapper.ThumbMapper;
 import com.cuit.zjq.service.ThumbService;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ThumbServiceImpl implements ThumbService {
     private ThumbMapper thumbMapper;
 
     @Override
-    public Boolean thumbUpdate(InteractionRequest interactionRequest) {
+    public Boolean thumbUpdate(InteractionUpdateRequest interactionRequest) {
         int result = 0;
         if (interactionRequest.getType() == OPERATE) {
             String id = UUID.randomUUID().toString().replace("-", "");

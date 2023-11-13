@@ -1,7 +1,7 @@
 package com.cuit.zjq.service;
 
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 
 /**
  * @description 针对表【thumb】的数据库操作Service
@@ -12,5 +12,5 @@ public interface ThumbService {
      *
      * @return
      */
-    Boolean thumbUpdate(InteractionRequest interactionRequest);
+    Boolean thumbUpdate(InteractionUpdateRequest interactionRequest);
 }

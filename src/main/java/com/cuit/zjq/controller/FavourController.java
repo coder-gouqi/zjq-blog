@@ -1,6 +1,6 @@
 package com.cuit.zjq.controller;
 
-import com.cuit.zjq.common.InteractionRequest;
+import com.cuit.zjq.common.InteractionUpdateRequest;
 import com.cuit.zjq.common.StatusResponse;
 import com.cuit.zjq.common.StatusResponseCode;
 import com.cuit.zjq.service.FavourService;
@@ -19,9 +19,9 @@ public class FavourController {
     private FavourService favourService;
 
     @PostMapping("/update")
-    public StatusResponse doFavour(@RequestBody InteractionRequest interactionRequest) {
+    public StatusResponse doFavour(@RequestBody InteractionUpdateRequest interactionUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
-        Boolean result = favourService.favourUpdate(interactionRequest);
+        Boolean result = favourService.favourUpdate(interactionUpdateRequest);
         statusResponse.setData(result);
         if (result) {
             statusResponse.setMsgAndCode(StatusResponseCode.SUCCESS);
