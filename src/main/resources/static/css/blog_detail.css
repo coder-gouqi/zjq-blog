@@ -1,0 +1,58 @@
+/*
+    这个样式文件给博客详情页使用
+*/
+
+/*
+    设置标题样式
+*/
+
+.container-right .title {
+    /*
+        文字居中
+    */
+    text-align: center;
+
+    /*
+        边距 : 距离产生美
+    */
+    padding: 30px
+
+}
+
+
+/*
+    设置日期样式
+*/
+
+.container-right .date {
+    /*
+        文字颜色
+    */
+    color: rgb(15, 189, 114);
+
+    /*
+        位子居中
+    */
+    text-align: center;
+
+    /*
+        设置内边距 (下) 为 20px
+    */
+    padding-bottom: 20px;
+}
+
+/*
+    设置 段落
+*/
+
+.container-right .content p {
+    /*
+        缩进 两字符
+    */
+    text-indent: 2em;
+
+    /*
+        内边距
+    */
+    padding: 10px 30px;
+}
