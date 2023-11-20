@@ -15,6 +15,7 @@
         <result property="commentNum" column="comment_num" jdbcType="INTEGER"/>
         <result property="forwardNum" column="forward_num" jdbcType="INTEGER"/>
         <result property="top" column="top" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
         <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
     </resultMap>
 
@@ -23,13 +24,12 @@
         ,user_id,title,
         content,tags,favour_num,
         thumb_num,comment_num,forward_num,
-        top,is_delete
+        top,create_time,is_delete
     </sql>
     <insert id="insert" parameterType="object">
-        insert into essay (id, user_id, title, content, tags, favour_num, thumb_num, comment_num, forward_num, top,
-                           is_delete)
+        insert into essay (id, user_id, title, content, tags, favour_num, thumb_num, comment_num, forward_num, top,create_time, is_delete)
         values (#{id}, #{userId}, #{title}, #{content}, #{tags}, #{favourNum}, #{thumbNum}, #{commentNum},
-                #{forwardNum}, #{top}, #{isDelete})
+                #{forwardNum}, #{top}, #{createTime}, #{isDelete})
     </insert>
 
     <select id="select" resultType="com.cuit.zjq.model.domain.Essay">
@@ -48,6 +48,7 @@
         <if test="tags != null and tags!=''">
             and tags like '%${tags}%'
         </if>
+            order by create_time
     </select>
 
     <select id="selectById" resultType="com.cuit.zjq.model.domain.Essay">

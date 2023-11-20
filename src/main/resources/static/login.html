@@ -10,14 +10,12 @@
 
 <!-- 导航栏 -->
 <div class="nav">
-    <img src="./image/avatar.jpg">
-    <span class="title">我的博客系统</span>
+    <img th:src="@{/image/avatar.jpg}">
+    <span class="title">枸杞的博客</span>
 
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
-
-    <a href="#">主页</a>
-    <a href="#">写博客</a>
+    <a th:href="@{/list}">主页</a>
 </div>
 
 <!--

@@ -13,6 +13,8 @@ import com.cuit.zjq.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -32,6 +34,9 @@ public class CommentServiceImpl implements CommentService {
         String id = UUID.randomUUID().toString().replace("-", "");
         comment.setId(id);
         comment.setIsDelete(0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String time = formatter.format(LocalDateTime.now());
+        comment.setCreateTime(time);
         int insert = commentMapper.insert(comment);
         return insert > 0;
     }

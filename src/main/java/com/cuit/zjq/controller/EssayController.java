@@ -8,7 +8,6 @@ import com.cuit.zjq.model.dto.essay.EssayAddRequest;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import com.cuit.zjq.model.dto.essay.EssayUpdateRequest;
 import com.cuit.zjq.service.EssayService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

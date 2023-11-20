@@ -13,6 +13,8 @@ import com.cuit.zjq.service.EssayService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -35,6 +37,9 @@ public class EssayServiceImpl implements EssayService {
         essay.setCommentNum(0);
         essay.setForwardNum(0);
         essay.setIsDelete(0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String time = formatter.format(LocalDateTime.now());
+        essay.setCreateTime(time);
         int insert = essayMapper.insert(essay);
         return insert > 0;
     }
@@ -51,6 +56,12 @@ public class EssayServiceImpl implements EssayService {
     public List<Essay> essaySelect(EssayQueryRequest essayQueryRequest) {
         List<Essay> essayList = essayMapper.select(essayQueryRequest);
         return essayList;
+    }
+
+    @Override
+    public Essay essaySelectById(String id) {
+        Essay essay = essayMapper.selectById(id);
+        return essay;
     }
 
     @Override

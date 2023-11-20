@@ -33,6 +33,11 @@ public interface EssayService {
     List<Essay> essaySelect(EssayQueryRequest essayQueryRequest);
 
     /**
+     * 查看文章
+     */
+    Essay essaySelectById(String id);
+
+    /**
      * 删除文章
      */
     Boolean essayDelete(DeleteRequest deleteRequest);

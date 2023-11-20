@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>博客详情页</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/blog_detail.css}">
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div class="nav">
+    <img th:src="@{/image/avatar.jpg}">
+    <span class="title">枸杞的博客</span>
+
+    <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
+    <div class="spacer"></div>
+
+    <a th:href="@{/list}">主页</a>
+    <a th:href="@{/edit}">写博客</a>
+    <a th:href="@{/logout}">注销</a>
+</div>
+
+<!-- 页面主体部分 -->
+<div class="container">
+    <!--    左侧信息-->
+
+    <div class="container-left">
+
+        <!--        使用 这个 .card 表示用户信息-->
+        <div class="card">
+            <img th:src="@{/image/avatar.jpg}" alt="图片显示失败">
+            <!--            用户名-->
+            <h3>程序员枸杞</h3>
+            <a th:href="@{https://gitee.com/zh-jiaqi}" target="_blank">Gitee 地址</a>
+            <div class='counter'>
+                <span>文章</span>
+                <span>分类</span>
+            </div>
+            <div class="counter">
+                <span th:text="${essayCount}"></span>
+                <span>2</span>
+            </div>
+        </div>
+    </div>
+
+    <!--    右侧信息-->
+    <div class="container-right">
+
+        <!-- 博客标题 -->
+        <h3 class="title" th:text="${essay.title}">我的第一篇博客</h3>
+
+        <!-- 博客发布时间-->
+        <div class="date" th:text="${essay.createTime}"></div>
+        <!-- 博客正文 -->
+        <div class="content">
+            <p th:text="${essay.content}"></p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+
+
+

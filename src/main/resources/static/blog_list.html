@@ -11,15 +11,15 @@
 
 <!-- 导航栏 -->
 <div class="nav">
-    <img src="./image/avatar.jpg">
-    <span class="title">我的博客系统</span>
+    <img th:src="@{/image/avatar.jpg}">
+    <span class="title">枸杞的博客</span>
 
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a href="#">主页</a>
-    <a href="#">写博客</a>
-    <a href="#">注销</a>
+    <a th:href="@{/list}">主页</a>
+    <a th:href="@{/edit}">写博客</a>
+    <a th:href="@{/logout}">注销</a>
 </div>
 
 <!-- 页面主体部分 -->
@@ -32,14 +32,14 @@
         <div class="card">
             <img src="./image/avatar.jpg" alt="图片显示失败">
             <!--            用户名-->
-            <h3>牧</h3>
-            <a href="#">Gitee 地址</a>
+            <h3>程序员枸杞</h3>
+            <a th:href="@{https://gitee.com/zh-jiaqi}" target="_blank">Gitee 地址</a>
             <div class='counter'>
                 <span>文章</span>
                 <span>分类</span>
             </div>
             <div class="counter">
-                <span>1</span>
+                <span th:text="${essayCount}"></span>
                 <span>2</span>
             </div>
         </div>
@@ -77,7 +77,6 @@
                 查看全文按钮
             -->
             <a href = "#">查看全文 &gt;&gt;</a>
-
 
         </div>
         <div class="blog">
