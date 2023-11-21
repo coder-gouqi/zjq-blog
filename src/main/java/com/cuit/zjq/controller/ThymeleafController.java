@@ -1,9 +1,10 @@
 package com.cuit.zjq.controller;
 
-import com.cuit.zjq.common.StatusResponse;
+import cn.hutool.core.util.StrUtil;
 import com.cuit.zjq.model.domain.Essay;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import com.cuit.zjq.model.dto.user.UserLoginRequest;
+import com.cuit.zjq.model.dto.user.UserRegisterRequest;
 import com.cuit.zjq.service.EssayService;
 import com.cuit.zjq.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -63,10 +65,24 @@ public class ThymeleafController {
     }
 
 
-    @PostMapping("/login")
-    public String userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+    @PostMapping("/register")
+    public String userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
+        Boolean result = userService.userRegister(userRegisterRequest);
+        if (result) {
+            return "login";
+        } else {
+            return "login";
+        }
+    }
+
+    @RequestMapping("/login")
+    public String userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request, Model model) {
         String result = userService.userLogin(userLoginRequest, request);
-        return "redirect:/list";
+        if (StrUtil.isNotBlank(result)) {
+            return "redirect:/list";
+        } else {
+            return "login";
+        }
     }
 
     @GetMapping("/logout")

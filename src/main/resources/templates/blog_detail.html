@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>博客详情页</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/blog_detail.css}">
 </head>
@@ -56,10 +57,20 @@
         <div class="content">
             <p th:text="${essay.content}"></p>
         </div>
+        <div class="comment-container">
+            <h3>评论区</h3>
+            <hr>
+            <textarea id="comment" class="mo-textarea"></textarea>
+            <button id="add" type="button">发送</button>
+        </div>
+        <div id="commend">
+        </div>
     </div>
-
 </div>
 </body>
+<script>
+
+</script>
 </html>
 
 

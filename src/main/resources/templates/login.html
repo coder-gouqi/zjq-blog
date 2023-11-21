@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
@@ -21,51 +22,75 @@
 
 <!--
     正文部分
-
     这个 login-container 是贯穿整个页面的容器
 -->
 <div class="login-container">
-
     <!-- 垂直水平居中的登录对话框    -->
     <div class="login-dialog">
         <h3>登录</h3>
-        <form id="loginForm">
-            <div class="row">
-                <span>用户名</span>
-                <input type="text" id="userAccount" placeholder="输入用户名">
-            </div>
-            <div class="row">
-                <span>密码</span>
-                <input type="password" id="userPassword" placeholder="输入密码">
-            </div>
-            <div class="row">
-                <button id="submit">提交</button>
-            </div>
-        </form>
-
-
         <div class="row">
-
-            <a id="insert">
-                注册
-            </a>
+            <span>用户名</span>
+            <input type="text" id="userAccount" placeholder="输入用户名">
+        </div>
+        <div class="row">
+            <span>密码</span>
+            <input type="password" id="userPassword" placeholder="输入密码">
+        </div>
+        <div class="row">
+            <button id="submit" type="button">提交</button>
+        </div>
+        <div class="row">
+            <button id="insert" type="button">注册</button>
         </div>
     </div>
 </div>
 </body>
 <script>
-    function submitLogin() {
-        let form = document.getElementById("loginForm")
+    $("#submit").click(function () {
+        let account = document.getElementById("userAccount").value;
+        let password = document.getElementById("userPassword").value;
         let params = {
-            userAccount: form.userAccount,
-            userPassword: form.userPassword
+            userAccount: account,
+            userPassword: password
         }
-        console.log(params)
-        // $.ajax({
-        //     url: "http://localhost:8080/login",
-        //     method: "post",
-        //     data: params.toString()
-        // })
-    }
+        $.ajax({
+            url: "http://127.0.0.1:8080/login",
+            type: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (res) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+
+                console.log(res.data)
+            },
+            error: function (xhr) {
+                // 只有请求不正常（状态码不为200）才会执行
+                console.log('error', xhr);
+            },
+        })
+    })
+
+    $("#insert").click(function () {
+        let account = document.getElementById("userAccount").value;
+        let password = document.getElementById("userPassword").value;
+        let params = {
+            userAccount: account,
+            userPassword: password
+        }
+        $.ajax({
+            url: "http://127.0.0.1:8080/register",
+            type: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (res) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+                alert("注册成功")
+            },
+            error: function (xhr) {
+                // 只有请求不正常（状态码不为200）才会执行
+                console.log('error', xhr);
+            },
+        })
+    })
 </script>
 </html>
