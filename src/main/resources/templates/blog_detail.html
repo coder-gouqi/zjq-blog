@@ -39,7 +39,7 @@
                 <span>分类</span>
             </div>
             <div class="counter">
-                <span th:text="${essayCount}"></span>
+                <span th:utext="${essayCount}"></span>
                 <span>2</span>
             </div>
         </div>
@@ -49,18 +49,25 @@
     <div class="container-right">
 
         <!-- 博客标题 -->
-        <h3 class="title" th:text="${essay.title}">我的第一篇博客</h3>
+        <h3 class="title" th:utext="${essay.title}">我的第一篇博客</h3>
+
+        <h4 class="title" th:utext="${essay.userId}">作者</h4>
 
         <!-- 博客发布时间-->
-        <div class="date" th:text="${essay.createTime}"></div>
+        <div class="date"
+             th:utext="${essay.createTime}+'<p>点赞数：'+${essay.thumbNum}+'转发数：'+${essay.forwardNum}+'收藏数：'+${essay.favourNum}+'</p>'">
+        </div>
         <!-- 博客正文 -->
         <div class="content">
-            <p th:text="${essay.content}"></p>
+            <p th:utext="${essay.content}"></p>
+            <button th:name="${essay.id}">点赞</button>
+            <button th:name="${essay.id}">转发</button>
+            <button th:name="${essay.id}">收藏</button>
         </div>
         <div class="comment-container">
             <h3>评论区</h3>
             <hr>
-            <textarea id="comment" class="mo-textarea"></textarea>
+            <textarea id="comment" th:name="${essay.id}" class="mo-textarea"></textarea>
             <button id="add" type="button">发送</button>
         </div>
         <div id="commend">

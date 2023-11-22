@@ -37,7 +37,7 @@
             <input type="password" id="userPassword" placeholder="输入密码">
         </div>
         <div class="row">
-            <button id="submit" type="button">提交</button>
+            <button id="submit" type="button">登录</button>
         </div>
         <div class="row">
             <button id="insert" type="button">注册</button>
@@ -60,7 +60,7 @@
             contentType: 'application/json',
             success: function (res) {
                 // 只有请求成功（状态码为200）才会执行这个函数
-
+                window.location.href = "http://127.0.0.1:8080";
                 console.log(res.data)
             },
             error: function (xhr) {

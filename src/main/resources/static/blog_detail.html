@@ -36,7 +36,7 @@
                 <span>分类</span>
             </div>
             <div class="counter">
-                <span th:text="${essayCount}"></span>
+                <span th:utext="${essayCount}"></span>
                 <span>2</span>
             </div>
         </div>
@@ -48,8 +48,15 @@
         <!-- 博客标题 -->
         <h3 class="title">我的第一篇博客</h3>
 
+        <h4 class="title">作者</h4>
+
         <!-- 博客发布时间-->
-        <div class="date">2023-03-02</div>
+        <div class="date">2023-03-02
+            <p>
+                点赞数：12 转发数：5 收藏数：6
+            </p>
+        </div>
+
         <!-- 博客正文 -->
         <div class="content">
             <P>

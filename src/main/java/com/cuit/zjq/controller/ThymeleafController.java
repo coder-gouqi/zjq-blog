@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import static com.cuit.zjq.common.Constant.USER_LOGIN_STATE;
 
 @Controller
 @RequestMapping("/")
@@ -37,11 +38,14 @@ public class ThymeleafController {
 
 
     @RequestMapping("/")
-    public String login(Model model) {
-        EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
-        List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
-        model.addAttribute("essayList", essayList);
-        model.addAttribute("essayCount", essayList.size());
+    public String login(Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute(USER_LOGIN_STATE) != null) {
+            EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
+            List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
+            model.addAttribute("essayList", essayList);
+            model.addAttribute("essayCount", essayList.size());
+            return "blog_list";
+        }
         return "login";
     }
 
@@ -79,7 +83,8 @@ public class ThymeleafController {
     public String userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request, Model model) {
         String result = userService.userLogin(userLoginRequest, request);
         if (StrUtil.isNotBlank(result)) {
-            return "redirect:/list";
+            model.addAttribute("message", "成功");
+            return "redirect:/";
         } else {
             return "login";
         }

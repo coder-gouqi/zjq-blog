@@ -28,7 +28,7 @@
     /*
         文字颜色
     */
-    color: rgb(15, 189, 114);
+    color: black;
 
     /*
         位子居中
@@ -77,6 +77,10 @@ textarea {
 
 textarea:focus {
     outline: none;
+}
+
+.content{
+    text-align: center;
 }
 
 /* 自定义样式 */
