@@ -52,6 +52,9 @@
         <h3 class="title" th:utext="${essay.title}">我的第一篇博客</h3>
 
         <h4 class="title" th:utext="${essay.userId}">作者</h4>
+        <div id="userId" th:text="${user.id}" style="display: none"></div>
+        <div id="essayId" th:text="${essay.userId}" style="display: none"></div>
+
 
         <!-- 博客发布时间-->
         <div class="date"
@@ -60,14 +63,14 @@
         <!-- 博客正文 -->
         <div class="content">
             <p th:utext="${essay.content}"></p>
-            <button th:name="${essay.id}">点赞</button>
-            <button th:name="${essay.id}">转发</button>
-            <button th:name="${essay.id}">收藏</button>
+            <button id="thumb">点赞</button>
+            <button id="forward">转发</button>
+            <button id="favour">收藏</button>
         </div>
         <div class="comment-container">
             <h3>评论区</h3>
             <hr>
-            <textarea id="comment" th:name="${essay.id}" class="mo-textarea"></textarea>
+            <textarea id="comment" class="mo-textarea"></textarea>
             <button id="add" type="button">发送</button>
         </div>
         <div id="commend">
@@ -76,7 +79,75 @@
 </div>
 </body>
 <script>
-
+    $("#thumb").click(function () {
+        let userId = document.getElementById("userId").innerText
+        let essayId = document.getElementById("essayId").innerText
+        console.log(userId)
+        let params = {
+            userId: userId,
+            essayId: essayId,
+        }
+        let host = "http://localhost:8080"
+        $.ajax({
+            url: host + "/thumb/update",
+            method: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (result) {//result为返回结果
+                console.log("成功")
+                alert("点赞成功")
+            },
+            error: function () {//运行错误会执行此方法
+                console.log("失败")
+            }
+        })
+    })
+    $("#forward").click(function () {
+        let userId = document.getElementById("userId").innerText
+        let essayId = document.getElementById("essayId").innerText
+        console.log(userId)
+        let params = {
+            userId: userId,
+            essayId: essayId,
+        }
+        let host = "http://localhost:8080"
+        $.ajax({
+            url: host + "/forward/update",
+            method: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (result) {//result为返回结果
+                console.log("成功")
+                alert("转发成功")
+            },
+            error: function () {//运行错误会执行此方法
+                console.log("失败")
+            }
+        })
+    })
+    $("#favour").click(function () {
+        let userId = document.getElementById("userId").innerText
+        let essayId = document.getElementById("essayId").innerText
+        console.log(userId)
+        let params = {
+            userId: userId,
+            essayId: essayId,
+        }
+        let host = "http://localhost:8080"
+        $.ajax({
+            url: host + "/favour/update",
+            method: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (result) {//result为返回结果
+                console.log("成功")
+                alert("收藏成功")
+            },
+            error: function () {//运行错误会执行此方法
+                console.log("失败")
+            }
+        })
+    })
 </script>
 </html>
 

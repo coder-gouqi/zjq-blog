@@ -2,6 +2,7 @@ package com.cuit.zjq.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.cuit.zjq.model.domain.Essay;
+import com.cuit.zjq.model.domain.User;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import com.cuit.zjq.model.dto.user.UserLoginRequest;
 import com.cuit.zjq.model.dto.user.UserRegisterRequest;
@@ -50,9 +51,11 @@ public class ThymeleafController {
     }
 
     @GetMapping("/detail/{id}")
-    public String essaySelectById(Model model, @PathVariable("id") String essayId) {
+    public String essaySelectById(Model model, @PathVariable("id") String essayId,HttpServletRequest request) {
         Essay essay = essayService.essaySelectById(essayId);
         model.addAttribute("essay", essay);
+        Object obj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        model.addAttribute("user", (User) obj);
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayCount", essayList.size());
@@ -60,8 +63,10 @@ public class ThymeleafController {
     }
 
     @GetMapping("/edit")
-    public String essayAdd(Model model) {
+    public String essayAdd(Model model, HttpServletRequest request) {
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
+        Object obj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        model.addAttribute("user", (User) obj);
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayList", essayList);
         model.addAttribute("essayCount", essayList.size());

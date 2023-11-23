@@ -63,7 +63,7 @@
             <!--
                 博客的摘要
             -->
-            <div class="desc" th:utext="${essay.content.substring(0,50)}"></div>
+            <div class="desc" th:utext="${essay.content.substring(0,essay.getContent().length()-1)}"></div>
 
             <!--
                 查看全文按钮

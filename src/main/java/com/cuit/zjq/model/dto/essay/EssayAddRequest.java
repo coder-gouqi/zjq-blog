@@ -24,9 +24,4 @@ public class EssayAddRequest {
      * 文章标签
      */
     private String tags;
-
-    /**
-     * 文章置顶
-     */
-    private Integer top;
 }

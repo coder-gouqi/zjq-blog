@@ -35,12 +35,14 @@
     <form id="mdEditor">
         <!--    博客标题编译去-->
         <div class="title">
-            <input type="text" id="title" name="title" placeholder="请输入文章标题">
+            <input type="text" id="title" placeholder="请输入文章标题">
+            <br>
+            <input type="text" id="tags" placeholder="请输入文章标签">
 
-            <button id="submit" onclick="hello()">发布文章</button>
+            <button id="submit" type="button">发布文章</button>
         </div>
+        <div id="userId" th:text="${user.id}" style="display: none"></div>
         <!--    博客编译器,这里用 id 是为了和 markdown 对接-->
-
     </form>
     <div id="editor">
     </div>
@@ -54,27 +56,32 @@
             // 设置编译器高度
             height: "calc(100% - 50px)",
             // 编译器中的初始内容
-            markdown: "# 在这里写一篇博客",
+            markdown: "",
             // 指定 editor.md 依赖的插件路径
             path: "./editor.md/lib/",
             // 保存 HTML 到 Textarea
             saveHTMLToTextarea: true,
         })
 
-        function hello() {
-            let form = document.getElementById("mdEditor")
-            let content = document.getElementsByName("editor-html-code")
+        $("#submit").click(function () {
+            let userId = document.getElementById("userId").value
+            let title = document.getElementById("title").value
+            let tags = document.getElementById("tags").value
+            let content = editor.getHTML()
+            console.log(title)
             console.log(content)
             let params = {
-                title: form.title,
-                content: "content",
-                userId: ""
+                title: title,
+                content: content,
+                userId: userId,
+                tags: tags
             }
             let host = "http://localhost:8080"
             $.ajax({
                 url: host + "/essay/add",
                 method: "post",
-                data: params,
+                data: JSON.stringify(params),
+                contentType: 'application/json',
                 success: function (result) {//result为返回结果
                     console.log("成功")
                 },
@@ -82,10 +89,8 @@
                     console.log("失败")
                 }
             })
-        }
-
+        })
     </script>
-
 </div>
 </body>
 </html>
