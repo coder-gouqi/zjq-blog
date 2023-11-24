@@ -83,10 +83,11 @@
                 data: JSON.stringify(params),
                 contentType: 'application/json',
                 success: function (result) {//result为返回结果
-                    console.log("成功")
+                    alert("发布成功")
+                    location.href = "http://127.0.0.1:8080/list"
                 },
                 error: function () {//运行错误会执行此方法
-                    console.log("失败")
+                    alert("发布失败")
                 }
             })
         })

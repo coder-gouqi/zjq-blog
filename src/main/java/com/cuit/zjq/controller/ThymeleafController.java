@@ -1,11 +1,14 @@
 package com.cuit.zjq.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.cuit.zjq.model.domain.Comment;
 import com.cuit.zjq.model.domain.Essay;
 import com.cuit.zjq.model.domain.User;
+import com.cuit.zjq.model.dto.comment.CommentQueryRequest;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import com.cuit.zjq.model.dto.user.UserLoginRequest;
 import com.cuit.zjq.model.dto.user.UserRegisterRequest;
+import com.cuit.zjq.service.CommentService;
 import com.cuit.zjq.service.EssayService;
 import com.cuit.zjq.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,9 @@ public class ThymeleafController {
 
     @Resource
     private EssayService essayService;
+
+    @Resource
+    private CommentService commentService;
 
     @Resource
     private UserService userService;
@@ -51,7 +57,7 @@ public class ThymeleafController {
     }
 
     @GetMapping("/detail/{id}")
-    public String essaySelectById(Model model, @PathVariable("id") String essayId,HttpServletRequest request) {
+    public String essaySelectById(Model model, @PathVariable("id") String essayId, HttpServletRequest request) {
         Essay essay = essayService.essaySelectById(essayId);
         model.addAttribute("essay", essay);
         Object obj = request.getSession().getAttribute(USER_LOGIN_STATE);
@@ -59,6 +65,10 @@ public class ThymeleafController {
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayCount", essayList.size());
+        CommentQueryRequest commentQueryRequest = new CommentQueryRequest();
+        commentQueryRequest.setEssayId(essayId);
+        List<Comment> commentList = commentService.commentSelect(commentQueryRequest);
+        model.addAttribute("commentList", commentList);
         return "blog_detail";
     }
 
@@ -89,7 +99,7 @@ public class ThymeleafController {
         String result = userService.userLogin(userLoginRequest, request);
         if (StrUtil.isNotBlank(result)) {
             model.addAttribute("message", "成功");
-            return "redirect:/";
+            return "blog_list";
         } else {
             return "login";
         }
@@ -100,4 +110,5 @@ public class ThymeleafController {
         Boolean result = userService.userLogout(request);
         return "redirect:/";
     }
+
 }

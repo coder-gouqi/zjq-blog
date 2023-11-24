@@ -24,11 +24,11 @@
 
 <!-- 页面主体部分 -->
 <div class="container">
-    <!--    左侧信息-->
+    <!--左侧信息-->
 
     <div class="container-left">
 
-        <!--        使用 这个 .card 表示用户信息-->
+        <!--使用 这个 .card 表示用户信息-->
         <div class="card">
             <img th:src="@{/image/avatar.jpg}" alt="图片显示失败">
             <!--            用户名-->
@@ -40,7 +40,7 @@
             </div>
             <div class="counter">
                 <span th:utext="${essayCount}"></span>
-                <span>2</span>
+                <span>0</span>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
 
         <h4 class="title" th:utext="${essay.userId}">作者</h4>
         <div id="userId" th:text="${user.id}" style="display: none"></div>
-        <div id="essayId" th:text="${essay.userId}" style="display: none"></div>
+        <div id="essayId" th:text="${essay.id}" style="display: none"></div>
 
 
         <!-- 博客发布时间-->
@@ -71,14 +71,44 @@
             <h3>评论区</h3>
             <hr>
             <textarea id="comment" class="mo-textarea"></textarea>
-            <button id="add" type="button">发送</button>
+            <button id="addComment" type="button">发送</button>
         </div>
-        <div id="commend">
+        <div id="commend" th:each="comment,state : ${commentList}">
+            <hr>
+            <p class="commentItem" th:text="'用户id：'+${comment.userId}"></p>
+            <p class="commentItem" th:text="'评论内容：'+${comment.content}"></p>
+            <p class="commentItem" th:text="'评论时间：'+${comment.createTime}"></p>
         </div>
     </div>
 </div>
 </body>
 <script>
+    $("#addComment").click(function () {
+        let userId = document.getElementById("userId").innerText
+        let essayId = document.getElementById("essayId").innerText
+        let comment = document.getElementById("comment").value
+        let params = {
+            userId: userId,
+            essayId: essayId,
+            content: comment,
+            replyTo: ''
+        }
+        let host = "http://localhost:8080"
+        $.ajax({
+            url: host + "/comment/add",
+            method: "post",
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            success: function (result) {//result为返回结果
+                alert("评论成功")
+                location.reload(true)
+            },
+            error: function () {//运行错误会执行此方法
+                alert("评论失败")
+            }
+        })
+    })
+
     $("#thumb").click(function () {
         let userId = document.getElementById("userId").innerText
         let essayId = document.getElementById("essayId").innerText
@@ -94,11 +124,10 @@
             data: JSON.stringify(params),
             contentType: 'application/json',
             success: function (result) {//result为返回结果
-                console.log("成功")
                 alert("点赞成功")
             },
             error: function () {//运行错误会执行此方法
-                console.log("失败")
+                alert("点赞失败")
             }
         })
     })
@@ -117,11 +146,11 @@
             data: JSON.stringify(params),
             contentType: 'application/json',
             success: function (result) {//result为返回结果
-                console.log("成功")
                 alert("转发成功")
             },
             error: function () {//运行错误会执行此方法
-                console.log("失败")
+                alert("转发失败")
+
             }
         })
     })

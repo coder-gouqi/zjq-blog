@@ -79,7 +79,7 @@ textarea:focus {
     outline: none;
 }
 
-.content{
+.content {
     text-align: center;
 }
 
@@ -136,4 +136,10 @@ button:hover { /*鼠标移动时的颜色变化*/
 #commend {
     flex: 1;
     width: 80%;
+}
+
+.commentItem {
+    text-indent: 50px;
+    margin-top: 20px;
+    padding-bottom: 20px;
 }
