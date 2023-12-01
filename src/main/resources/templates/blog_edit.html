@@ -10,13 +10,14 @@
     <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
 
     <!--    引入 editor.md 的依赖-->
-    <link rel="stylesheet" th:href="@{/editor.md/css/editormd.min.css}">
-    <script th:src="@{/editor.md/lib/marked.min.js}"></script>
-    <script th:src="@{/editor.md/lib/prettify.min.js}"></script>
-    <script th:src="@{/editor.md/editormd.min.js}"></script>
+    <link rel="stylesheet" href="../editor.md/css/editormd.min.css">
+    <script src="../editor.md/lib/marked.min.js"></script>
+    <script src="../editor.md/lib/prettify.min.js"></script>
+    <script src="../editor.md/editormd.min.js"></script>
 </head>
 <body>
-
+<!--登录会话状态-->
+<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE.id}"></div>
 
 <!-- 导航栏 -->
 <div class="nav">
@@ -26,8 +27,8 @@
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a th:href="@{/list}">主页</a>
-    <a th:href="@{/logout}">注销</a>
+    <a th:href="@{/essay/list}">主页</a>
+    <a th:href="@{/user/logout}">注销</a>
 </div>
 
 <!-- 编辑区的容器 -->
@@ -41,13 +42,10 @@
 
             <button id="submit" type="button">发布文章</button>
         </div>
-        <div id="userId" th:text="${user.id}" style="display: none"></div>
         <!--    博客编译器,这里用 id 是为了和 markdown 对接-->
     </form>
     <div id="editor">
     </div>
-
-
     <script>
         <!--        初始化编译器-->
         let editor = editormd("editor", {
@@ -64,7 +62,7 @@
         })
 
         $("#submit").click(function () {
-            let userId = document.getElementById("userId").value
+            let userId = document.getElementById("sessionUser").value
             let title = document.getElementById("title").value
             let tags = document.getElementById("tags").value
             let content = editor.getHTML()

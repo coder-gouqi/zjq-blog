@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import static com.cuit.zjq.common.Constant.USER_LOGIN_STATE;
 
 /**
@@ -62,6 +64,12 @@ public class UserServiceImpl implements UserService {
     public Boolean userLogout(HttpServletRequest request) {
         request.getSession().removeAttribute(USER_LOGIN_STATE);
         return true;
+    }
+
+    @Override
+    public List<User> selectUser() {
+        List<User> userList = userMapper.select();
+        return userList;
     }
 }
 

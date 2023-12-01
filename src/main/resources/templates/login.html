@@ -17,7 +17,7 @@
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a th:href="@{/list}">主页</a>
+    <a th:href="@{/essay/list}">主页</a>
 </div>
 
 <!--
@@ -54,14 +54,13 @@
             userPassword: password
         }
         $.ajax({
-            url: "http://127.0.0.1:8080/login",
+            url: "http://127.0.0.1:8080/user/login",
             type: "post",
             data: JSON.stringify(params),
             contentType: 'application/json',
             success: function (res) {
                 // 只有请求成功（状态码为200）才会执行这个函数
-                window.location.href = "http://127.0.0.1:8080";
-                console.log(res.data)
+                window.location.href = "http://127.0.0.1:8080/essay/list";
             },
             error: function (xhr) {
                 // 只有请求不正常（状态码不为200）才会执行
@@ -78,7 +77,7 @@
             userPassword: password
         }
         $.ajax({
-            url: "http://127.0.0.1:8080/register",
+            url: "http://127.0.0.1:8080/user/register",
             type: "post",
             data: JSON.stringify(params),
             contentType: 'application/json',

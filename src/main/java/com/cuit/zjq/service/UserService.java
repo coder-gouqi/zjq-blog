@@ -1,11 +1,13 @@
 package com.cuit.zjq.service;
 
 
+import com.cuit.zjq.model.domain.User;
 import com.cuit.zjq.model.dto.user.UserLoginRequest;
 import com.cuit.zjq.model.dto.user.UserRegisterRequest;
 import com.cuit.zjq.model.dto.user.UserUpdateRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 针对表【user】的数据库操作Service
@@ -43,4 +45,5 @@ public interface UserService {
     Boolean userLogout(HttpServletRequest request);
 
 
+    List<User> selectUser();
 }

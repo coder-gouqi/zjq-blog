@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
 <!-- 导航栏 -->
 <div class="nav">
     <img th:src="@{/image/avatar.jpg}">
@@ -18,9 +17,9 @@
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a th:href="@{/list}">主页</a>
-    <a th:href="@{/edit}">写博客</a>
-    <a th:href="@{/logout}">注销</a>
+    <a th:href="@{/essay/list}">主页</a>
+    <a th:href="@{/essay/edit}">写博客</a>
+    <a th:href="@{/user/logout}">注销</a>
 </div>
 
 <!-- 页面主体部分 -->
@@ -55,7 +54,7 @@
             <!--
                    博客标题
             -->
-            <div class="title" th:utext="${essay.title}">我的第一篇博客</div>
+            <div class="title" th:utext="${essay.title}"></div>
             <!--
                 发布时间
             -->
@@ -65,10 +64,11 @@
             -->
             <div class="desc" th:utext="${essay.content.substring(0,essay.getContent().length()-1)}"></div>
 
+
             <!--
                 查看全文按钮
             -->
-            <a th:href="@{'/detail/'+${essay.id}}">查看全文 &gt;&gt;</a>
+            <a th:href="@{'/essay/detail/'+${essay.id}}">查看全文 &gt;&gt;</a>
 
         </div>
     </div>
