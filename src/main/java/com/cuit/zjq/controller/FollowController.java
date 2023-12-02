@@ -15,13 +15,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/follow")
+@RequestMapping("/")
 public class FollowController {
 
     @Resource
     private FollowService followService;
 
-    @PostMapping("/update")
+    @PostMapping("/follow/update")
     public StatusResponse doFollow(@RequestBody FollowUpdateRequest followUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
         Boolean result = followService.followUpdate(followUpdateRequest);
@@ -34,7 +34,7 @@ public class FollowController {
         return statusResponse;
     }
 
-    @PostMapping("/select")
+    @PostMapping("/follow/select")
     public StatusResponse followSelect(@RequestBody FollowQueryRequest followQueryRequest) {
         StatusResponse statusResponse = new StatusResponse();
         List<Follow> followList = followService.followSelect(followQueryRequest);

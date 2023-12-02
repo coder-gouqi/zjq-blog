@@ -10,14 +10,14 @@
     <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
 
     <!--    引入 editor.md 的依赖-->
-    <link rel="stylesheet" href="../editor.md/css/editormd.min.css">
-    <script src="../editor.md/lib/marked.min.js"></script>
-    <script src="../editor.md/lib/prettify.min.js"></script>
-    <script src="../editor.md/editormd.min.js"></script>
+    <link rel="stylesheet" th:href="@{/editor.md/css/editormd.min.css}">
+    <script th:src="@{/editor.md/lib/marked.min.js}"></script>
+    <script th:src="@{/editor.md/lib/prettify.min.js}"></script>
+    <script th:src="@{/editor.md/editormd.min.js}"></script>
 </head>
 <body>
 <!--登录会话状态-->
-<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE.id}"></div>
+<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE?.id}"></div>
 
 <!-- 导航栏 -->
 <div class="nav">

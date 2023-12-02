@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--登录会话状态-->
-<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE.id}"></div>
+<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE?.id}"></div>
 
 <!-- 导航栏 -->
 <div class="nav">
@@ -20,7 +20,7 @@
     <div class="spacer"></div>
 
     <a th:href="@{/essay/list}">主页</a>
-    <a th:href="@{/essay/edit}">写博客</a>
+    <a th:href="@{/edit}">写博客</a>
     <a th:href="@{/user/logout}">注销</a>
 </div>
 

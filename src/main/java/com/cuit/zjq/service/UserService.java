@@ -27,7 +27,7 @@ public interface UserService {
      * @param userLoginRequest
      * @return
      */
-    String userLogin(UserLoginRequest userLoginRequest,HttpServletRequest request);
+    User userLogin(UserLoginRequest userLoginRequest,HttpServletRequest request);
 
     /**
      * 用户更新

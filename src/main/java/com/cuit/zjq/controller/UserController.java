@@ -1,9 +1,9 @@
 package com.cuit.zjq.controller;
 
-import cn.hutool.core.util.StrUtil;
 import com.cuit.zjq.common.StatusResponse;
 import com.cuit.zjq.common.StatusResponseCode;
 import com.cuit.zjq.model.domain.Essay;
+import com.cuit.zjq.model.domain.User;
 import com.cuit.zjq.model.dto.essay.EssayQueryRequest;
 import com.cuit.zjq.model.dto.user.UserLoginRequest;
 import com.cuit.zjq.model.dto.user.UserRegisterRequest;
@@ -12,10 +12,7 @@ import com.cuit.zjq.service.EssayService;
 import com.cuit.zjq.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +21,7 @@ import java.util.List;
 import static com.cuit.zjq.common.Constant.USER_LOGIN_STATE;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 
     @Resource
@@ -33,7 +30,7 @@ public class UserController {
     @Resource
     private EssayService essayService;
 
-    @RequestMapping("/")
+    @RequestMapping("/user")
     public String login(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute(USER_LOGIN_STATE) != null) {
             EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
@@ -45,7 +42,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public String userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
         Boolean result = userService.userRegister(userRegisterRequest);
         if (result) {
@@ -55,25 +52,26 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/login")
-    public String userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request, Model model) {
-        String result = userService.userLogin(userLoginRequest, request);
-        if (StrUtil.isNotBlank(result)) {
+    @RequestMapping("/user/login")
+    @ResponseBody
+    public User userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request, Model model) {
+        User result = userService.userLogin(userLoginRequest, request);
+        if (result != null) {
             model.addAttribute("message", "成功");
-            return "blog_list";
+            return result;
         } else {
-            return "login";
+            return null;
         }
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/user/logout")
     public String userLogout(HttpServletRequest request) {
         Boolean result = userService.userLogout(request);
         return "redirect:/user/";
     }
 
 
-    @PostMapping("/update")
+    @PostMapping("/user/update")
     public StatusResponse userUpdate(@RequestBody UserUpdateRequest userUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
         Boolean result = userService.userUpdate(userUpdateRequest);

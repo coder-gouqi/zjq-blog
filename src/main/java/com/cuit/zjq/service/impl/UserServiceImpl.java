@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 import static com.cuit.zjq.common.Constant.USER_LOGIN_STATE;
@@ -43,15 +42,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String userLogin(UserLoginRequest userLoginRequest, HttpServletRequest request) {
+    public User userLogin(UserLoginRequest userLoginRequest, HttpServletRequest request) {
         String userAccount = userLoginRequest.getUserAccount();
         String userPassword = userLoginRequest.getUserPassword();
         User user = userMapper.userLogin(userAccount, userPassword);
         if (ObjectUtil.isNotEmpty(user)) {
             request.getSession().setAttribute(USER_LOGIN_STATE, user);
-            return "token";
+            return user;
         }
-        return "";
+        return null;
     }
 
     @Override

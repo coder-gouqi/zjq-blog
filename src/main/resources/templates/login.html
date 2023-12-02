@@ -60,7 +60,12 @@
             contentType: 'application/json',
             success: function (res) {
                 // 只有请求成功（状态码为200）才会执行这个函数
-                window.location.href = "http://127.0.0.1:8080/essay/list";
+                if (res == null) {
+                    alert("登录失败")
+                } else {
+                    //跳转到文章列表
+                    window.location.href = "http://127.0.0.1:8080/essay/list";
+                }
             },
             error: function (xhr) {
                 // 只有请求不正常（状态码不为200）才会执行

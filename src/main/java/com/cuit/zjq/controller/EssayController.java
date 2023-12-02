@@ -53,7 +53,7 @@ public class EssayController {
         return "blog_list";
     }
 
-    @GetMapping("/essay/edit")
+    @GetMapping("/edit")
     public String essayAdd(Model model, HttpServletRequest request) {
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
         Object obj = request.getSession().getAttribute(USER_LOGIN_STATE);
@@ -64,7 +64,7 @@ public class EssayController {
         return "blog_edit";
     }
 
-    @GetMapping("/essay/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String essaySelectById(Model model, @PathVariable("id") String essayId, HttpServletRequest request) {
 //        Object obj = request.getSession().getAttribute(USER_LOGIN_STATE);
 //        User LoginUser = (User) obj;
