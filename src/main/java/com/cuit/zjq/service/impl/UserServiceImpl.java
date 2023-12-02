@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.userLogin(userAccount, userPassword);
         if (ObjectUtil.isNotEmpty(user)) {
             request.getSession().setAttribute(USER_LOGIN_STATE, user);
+            System.out.println(user);
             return user;
         }
         return null;

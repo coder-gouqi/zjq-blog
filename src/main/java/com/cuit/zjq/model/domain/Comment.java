@@ -1,5 +1,6 @@
 package com.cuit.zjq.model.domain;
 
+
 import lombok.Data;
 
 import java.io.Serializable;
@@ -30,14 +31,14 @@ public class Comment implements Serializable {
     private String content;
 
     /**
-     * 回复评论id
-     */
-    private String replyTo;
-
-    /**
      * 创建时间
      */
     private String createTime;
+
+    /**
+     * 回复评论id
+     */
+    private String replyTo;
 
     /**
      * 逻辑删除
@@ -45,4 +46,5 @@ public class Comment implements Serializable {
     private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
+
 }

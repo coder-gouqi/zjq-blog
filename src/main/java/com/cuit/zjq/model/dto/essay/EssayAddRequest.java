@@ -6,6 +6,11 @@ import lombok.Data;
 public class EssayAddRequest {
 
     /**
+     * 用户id
+     */
+    private String userId;
+
+    /**
      * 文章标题
      */
     private String title;
@@ -19,4 +24,9 @@ public class EssayAddRequest {
      * 文章标签
      */
     private String tags;
+
+    /**
+     * 文章置顶
+     */
+    private Integer top;
 }

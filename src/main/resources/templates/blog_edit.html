@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>博客编辑页</title>
-    <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/blog_edit.css}">
-
+    <link rel="stylesheet" th:href="@{/css/common.css}">
     <script th:src="@{/js/jquery.min.js}"></script>
     <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
 
@@ -27,8 +26,8 @@
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a th:href="@{/essay/list}">主页</a>
-    <a th:href="@{/user/logout}">注销</a>
+    <button id="list" type="button">主页</button>
+    <button id="logout" type="button">注销</button>
 </div>
 
 <!-- 编辑区的容器 -->
@@ -47,6 +46,9 @@
     <div id="editor">
     </div>
     <script>
+
+        let host = "http://127.0.0.1:8080";
+
         <!--        初始化编译器-->
         let editor = editormd("editor", {
             // 这里的尺寸必须在这设置 ，设置样式会被 editormd 自动覆盖
@@ -61,20 +63,39 @@
             saveHTMLToTextarea: true,
         })
 
+        $("#list").click(function () {
+            window.location.href = host + "/list";
+        })
+
+        $("#logout").click(function () {
+            let userId = document.getElementById("sessionUser").innerText
+            $.ajax({
+                url: host + "/user/logout", method: "post", success: function (res) {//res为返回结果
+                    if (res.code == 1) {
+                        alert("注销成功")
+                        window.location.href = host + "/";
+                    } else {
+                        alert("注销失败")
+                    }
+                }, error: function () {//运行错误会执行此方法
+                    alert("点赞失败")
+                    window.location.href = host + "/403";
+                }
+            })
+        })
+
         $("#submit").click(function () {
-            let userId = document.getElementById("sessionUser").value
+            let userId = document.getElementById("sessionUser").innerText
             let title = document.getElementById("title").value
             let tags = document.getElementById("tags").value
             let content = editor.getHTML()
-            console.log(title)
-            console.log(content)
+            console.log(userId)
             let params = {
                 title: title,
                 content: content,
                 userId: userId,
                 tags: tags
             }
-            let host = "http://localhost:8080"
             $.ajax({
                 url: host + "/essay/add",
                 method: "post",
@@ -82,7 +103,7 @@
                 contentType: 'application/json',
                 success: function (result) {//result为返回结果
                     alert("发布成功")
-                    location.href = "http://127.0.0.1:8080/list"
+                    location.href = host + "/list"
                 },
                 error: function () {//运行错误会执行此方法
                     alert("发布失败")

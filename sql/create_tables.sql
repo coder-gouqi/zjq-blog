@@ -1,9 +1,9 @@
 -- 创建库
 create
-database if not exists zjq-blog;
+database if not exists `zjq-blog`;
 
 -- 切换库
-use zjq-blog;
+use `zjq-blog`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;

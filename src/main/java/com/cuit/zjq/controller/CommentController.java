@@ -12,24 +12,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/comment")
 public class CommentController {
 
     @Resource
     private CommentService commentService;
 
-    @PostMapping("/comment/add")
-    public String commentAdd(@RequestBody CommentAddRequest commentAddRequest) {
+    @PostMapping("/add")
+    @ResponseBody
+    public StatusResponse commentAdd(@RequestBody CommentAddRequest commentAddRequest) {
+        StatusResponse statusResponse = new StatusResponse();
         Boolean result = commentService.commentAdd(commentAddRequest);
-        return "blog_list";
+        statusResponse.setData(result);
+        if (result) {
+            statusResponse.setMsgAndCode(StatusResponseCode.SUCCESS);
+        } else {
+            statusResponse.setMsgAndCode(StatusResponseCode.ERROR);
+        }
+        return statusResponse;
     }
 
-    @PostMapping("/comment/update")
+    @PostMapping("/update")
+    @ResponseBody
     public StatusResponse commentUpdate(@RequestBody CommentUpdateRequest commentUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
         Boolean result = commentService.commentUpdate(commentUpdateRequest);
@@ -42,7 +52,8 @@ public class CommentController {
         return statusResponse;
     }
 
-    @PostMapping("/comment/select")
+    @PostMapping("/select")
+    @ResponseBody
     public StatusResponse commentSelect(@RequestBody CommentQueryRequest commentQueryRequest) {
         StatusResponse statusResponse = new StatusResponse();
         List<Comment> commentList = commentService.commentSelect(commentQueryRequest);
@@ -56,7 +67,8 @@ public class CommentController {
         return statusResponse;
     }
 
-    @PostMapping("/comment/delete")
+    @PostMapping("/delete")
+    @ResponseBody
     public StatusResponse commentDelete(@RequestBody DeleteRequest deleteRequest) {
         StatusResponse statusResponse = new StatusResponse();
         Boolean result = commentService.commentDelete(deleteRequest);

@@ -1,5 +1,6 @@
 package com.cuit.zjq.model.domain;
 
+
 import lombok.Data;
 
 import java.io.Serializable;
@@ -70,4 +71,6 @@ public class Essay implements Serializable {
     private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
+
+
 }

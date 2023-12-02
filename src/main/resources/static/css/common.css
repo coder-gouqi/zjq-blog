@@ -81,15 +81,13 @@ body {
 
 }
 
-
-.nav a {
+.nav button {
+    background-color: transparent;
+    border-style: none;
     color: white;
-
-    /*    去掉下划线 */
-    text-decoration: none;
-
     margin: 0 10px;
 }
+
 
 
 .nav .spacer {

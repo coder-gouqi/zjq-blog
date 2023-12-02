@@ -10,18 +10,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/follow")
 public class FollowController {
 
     @Resource
     private FollowService followService;
 
-    @PostMapping("/follow/update")
+    @PostMapping("/update")
+    @ResponseBody
     public StatusResponse doFollow(@RequestBody FollowUpdateRequest followUpdateRequest) {
         StatusResponse statusResponse = new StatusResponse();
         Boolean result = followService.followUpdate(followUpdateRequest);
@@ -34,7 +36,7 @@ public class FollowController {
         return statusResponse;
     }
 
-    @PostMapping("/follow/select")
+    @PostMapping("/select")
     public StatusResponse followSelect(@RequestBody FollowQueryRequest followQueryRequest) {
         StatusResponse statusResponse = new StatusResponse();
         List<Follow> followList = followService.followSelect(followQueryRequest);

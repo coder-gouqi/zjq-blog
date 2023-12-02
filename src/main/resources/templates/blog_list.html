@@ -8,6 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/blog_list.css}">
 </head>
 <body>
+<!--登录会话状态-->
+<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE?.id}"></div>
 
 <!-- 导航栏 -->
 <div class="nav">
@@ -17,9 +19,9 @@
     <!--    这个标签仅仅用于占位 ,把下面几个a 标签挤到右边-->
     <div class="spacer"></div>
 
-    <a th:href="@{/essay/list}">主页</a>
-    <a th:href="@{/edit}">写博客</a>
-    <a th:href="@{/user/logout}">注销</a>
+    <button id="list" type="button">主页</button>
+    <button id="edit" type="button">写博客</button>
+    <button id="logout" type="button">注销</button>
 </div>
 
 <!-- 页面主体部分 -->
@@ -74,4 +76,43 @@
     </div>
 </div>
 </body>
+<script>
+
+    let host = "http://127.0.0.1:8080";
+
+    $("#list").click(function () {
+        window.location.href = host + "/list";
+    })
+
+    $("#edit").click(function () {
+        let userId = document.getElementById("sessionUser").innerText
+        if (userId == "") {
+            alert("请先登录")
+            window.location.href = host + "/";
+            return
+        }
+        window.location.href = host + "/edit";
+    })
+
+    $("#logout").click(function () {
+        let userId = document.getElementById("sessionUser").innerText
+        if (userId != "") {
+            alert("注销失败")
+            return
+        }
+        $.ajax({
+            url: host + "/user/logout", method: "post", success: function (res) {//res为返回结果
+                if (res.code == 1) {
+                    alert("注销成功")
+                    window.location.href = host + "/";
+                } else {
+                    alert("注销失败")
+                }
+            }, error: function () {//运行错误会执行此方法
+                alert("点赞失败")
+                window.location.href = host + "/403";
+            }
+        })
+    })
+</script>
 </html>
