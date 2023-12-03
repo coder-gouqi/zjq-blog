@@ -32,6 +32,8 @@ public interface EssayService {
      */
     List<Essay> essaySelect(EssayQueryRequest essayQueryRequest);
 
+    List<Essay> essaySelectByPage(EssayQueryRequest essayQueryRequest);
+
     /**
      * 查看文章
      */

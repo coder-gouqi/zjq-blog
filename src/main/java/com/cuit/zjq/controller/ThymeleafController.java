@@ -51,15 +51,16 @@ public class ThymeleafController {
     @GetMapping("/list/page")
     public String essaySelect(Model model, @RequestParam("currentPage") int currentPage) {
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
-        essayQueryRequest.setCurrentPage(currentPage);
+        essayQueryRequest.setCurrentPage(currentPage * pageSize);
         essayQueryRequest.setPageSize(pageSize);
+        List<Essay> essayPageList = essayService.essaySelectByPage(essayQueryRequest);
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
-        model.addAttribute("essayList", essayList);
+        model.addAttribute("essayList", essayPageList);
         model.addAttribute("essayCount", essayList.size());
         model.addAttribute("tagsCount", essayService.selectTagsCount());
         model.addAttribute("pre", Math.max(currentPage - 1, 0));
-        model.addAttribute("next", Math.min(currentPage + 1, (int) Math.ceil((double) essayList.size() / (double) pageSize)));
-        model.addAttribute("end", (int) Math.ceil((double) essayList.size() / (double) pageSize));
+        model.addAttribute("next", Math.min(currentPage + 1, essayList.size() % pageSize == 0 ? essayList.size() / pageSize - 1 : essayList.size() / pageSize));
+        model.addAttribute("end", essayList.size() % pageSize == 0 ? essayList.size() / pageSize - 1 : essayList.size() / pageSize);
         return "blog_list";
     }
 
@@ -67,15 +68,16 @@ public class ThymeleafController {
     public String essaySelect(Model model) {
         int currentPage = 0;
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
-        essayQueryRequest.setCurrentPage(currentPage);
+        essayQueryRequest.setCurrentPage(0);
         essayQueryRequest.setPageSize(pageSize);
+        List<Essay> essayPageList = essayService.essaySelectByPage(essayQueryRequest);
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
-        model.addAttribute("essayList", essayList);
+        model.addAttribute("essayList", essayPageList);
         model.addAttribute("essayCount", essayList.size());
         model.addAttribute("tagsCount", essayService.selectTagsCount());
         model.addAttribute("pre", 0);
-        model.addAttribute("next", Math.min(currentPage + 1, (int) Math.ceil((double) essayList.size() / (double) pageSize)));
-        model.addAttribute("end", (int) Math.ceil((double) essayList.size() / (double) pageSize));
+        model.addAttribute("next", Math.min(currentPage + 1, essayList.size() % pageSize == 0 ? essayList.size() / pageSize - 1 : essayList.size() / pageSize));
+        model.addAttribute("end", essayList.size() % pageSize == 0 ? essayList.size() / pageSize - 1 : essayList.size() / pageSize);
         return "blog_list";
     }
 

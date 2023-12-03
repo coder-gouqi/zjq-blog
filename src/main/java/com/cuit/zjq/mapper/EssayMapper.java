@@ -18,6 +18,8 @@ public interface EssayMapper {
 
     List<Essay> select(EssayQueryRequest essayQueryRequest);
 
+    List<Essay> selectByPage(EssayQueryRequest essayQueryRequest);
+
     Essay selectById(String id);
 
     int deleteById(DeleteRequest deleteRequest);

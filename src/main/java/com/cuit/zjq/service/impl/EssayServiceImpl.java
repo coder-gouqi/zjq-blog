@@ -61,6 +61,12 @@ public class EssayServiceImpl implements EssayService {
     }
 
     @Override
+    public List<Essay> essaySelectByPage(EssayQueryRequest essayQueryRequest) {
+        List<Essay> essayList = essayMapper.selectByPage(essayQueryRequest);
+        return essayList;
+    }
+
+    @Override
     public Essay essaySelectById(String id) {
         Essay essay = essayMapper.selectById(id);
         return essay;

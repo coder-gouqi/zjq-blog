@@ -32,12 +32,18 @@
                 #{forwardNum}, #{top}, #{createTime}, #{isDelete})
     </insert>
 
-    <select id="select" resultType="com.cuit.zjq.model.domain.Essay">
+    <select id="selectByPage" resultType="com.cuit.zjq.model.domain.Essay">
         select *
         from essay
         where is_delete = 0
             limit #{currentPage}
             , #{pageSize};
+    </select>
+
+    <select id="select" resultType="com.cuit.zjq.model.domain.Essay">
+        select *
+        from essay
+        where is_delete = 0
     </select>
 
     <select id="selectById" resultType="com.cuit.zjq.model.domain.Essay">
