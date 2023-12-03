@@ -36,4 +36,12 @@ public interface CommentService {
      * 删除评论
      */
     Boolean commentDelete(DeleteRequest deleteRequest);
+
+    /**
+     * 通过id查询评论
+     *
+     * @param id
+     * @return
+     */
+    Comment selectById(String id);
 }

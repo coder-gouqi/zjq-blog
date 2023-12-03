@@ -40,11 +40,11 @@
             <a th:href="@{https://gitee.com/zh-jiaqi}" target="_blank">Gitee 地址</a>
             <div class='counter'>
                 <span>文章</span>
-                <span>分类</span>
+                <span>标签</span>
             </div>
             <div class="counter">
                 <span th:utext="${essayCount}"></span>
-                <span>0</span>
+                <span th:utext="${tagsCount}"></span>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
         <div id="essayId" th:text="${essay.id}" style="display: none"></div>
         <!-- 博客发布时间-->
         <div class="date"
-             th:utext="${essay.createTime}+'<p>点赞数：'+${essay.thumbNum}+'转发数：'+${essay.forwardNum}+'收藏数：'+${essay.favourNum}+'</p>'">
+             th:utext="${essay.createTime}+'<br><br><p>点赞数：'+${essay.thumbNum}+'&emsp;转发数：'+${essay.forwardNum}+'&emsp;收藏数：'+${essay.favourNum}+'</p>'">
         </div>
         <!-- 博客正文 -->
         <div class="content">
@@ -71,6 +71,8 @@
             <button id="thumb">点赞</button>
             <button id="forward">转发</button>
             <button id="favour">收藏</button>
+            <br>
+            <br>
         </div>
         <div class="comment-container">
             <h3>评论区</h3>
@@ -83,6 +85,7 @@
             <p class="commentItem" th:text="'用户：'+${comment.user.userAccount}"></p>
             <p class="commentItem" th:text="'评论内容：'+${comment.content}"></p>
             <p class="commentItem" th:text="'评论时间：'+${comment.createTime}"></p>
+            <a class="commentItem" th:href="@{/comment/delete(id=${comment.id})}" th:if="${session.USER_LOGIN_STATE?.id==comment.user.id}">删除</a>
         </div>
     </div>
 </div>

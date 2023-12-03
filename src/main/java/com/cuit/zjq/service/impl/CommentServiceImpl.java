@@ -54,6 +54,12 @@ public class CommentServiceImpl implements CommentService {
         int delete = commentMapper.deleteById(deleteRequest);
         return delete > 0;
     }
+
+    @Override
+    public Comment selectById(String id) {
+        Comment comment = commentMapper.selectById(id);
+        return comment;
+    }
 }
 
 

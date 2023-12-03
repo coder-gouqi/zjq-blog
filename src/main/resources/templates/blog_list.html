@@ -22,7 +22,7 @@
     <button id="list" type="button">主页</button>
     <button id="issue" type="button" th:if="${session.USER_LOGIN_STATE?.id != null}">写博客</button>
     <button id="login" type="button" th:if="${session.USER_LOGIN_STATE?.id == null } ">登录</button>
-        <button id="logout" type="button" th:if="${session.USER_LOGIN_STATE?.id != null} ">注销</button>
+    <button id="logout" type="button" th:if="${session.USER_LOGIN_STATE?.id != null} ">注销</button>
 </div>
 
 <!-- 页面主体部分 -->
@@ -39,11 +39,11 @@
             <a th:href="@{https://gitee.com/zh-jiaqi}" target="_blank">Gitee 地址</a>
             <div class='counter'>
                 <span>文章</span>
-                <span>分类</span>
+                <span>标签</span>
             </div>
             <div class="counter">
                 <span th:utext="${essayCount}"></span>
-                <span>2</span>
+                <span th:utext="${tagsCount}"></span>
             </div>
         </div>
     </div>
@@ -74,6 +74,12 @@
             <a th:href="@{'/detail/'+${essay.id}}">查看全文 &gt;&gt;</a>
 
         </div>
+ <div id="page">
+     <a th:href="@{/list/page?currentPage=0}" class="btn btn-info">首页</a>
+     <a th:href="@{/list/page(currentPage=${pre})}" class="btn btn-info">上页</a>
+     <a th:href="@{/list/page(currentPage=${next})}" class="btn btn-info">下页</a>
+     <a th:href="@{/list/page(currentPage=${end})}" class="btn btn-info">末页</a>
+ </div>
     </div>
 </div>
 </body>

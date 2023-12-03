@@ -1,6 +1,7 @@
 package com.cuit.zjq.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.cuit.zjq.common.DeleteRequest;
 import com.cuit.zjq.model.domain.Comment;
 import com.cuit.zjq.model.domain.Essay;
 import com.cuit.zjq.model.domain.User;
@@ -35,27 +36,51 @@ public class ThymeleafController {
     @Resource
     private UserService userService;
 
+    private int pageSize = 3;
+
     @GetMapping("/")
-    public String login(Model model) {
+    public String login() {
         return "login";
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String register() {
         return "register";
+    }
+
+    @GetMapping("/list/page")
+    public String essaySelect(Model model, @RequestParam("currentPage") int currentPage) {
+        EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
+        essayQueryRequest.setCurrentPage(currentPage);
+        essayQueryRequest.setPageSize(pageSize);
+        List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
+        model.addAttribute("essayList", essayList);
+        model.addAttribute("essayCount", essayList.size());
+        model.addAttribute("tagsCount", essayService.selectTagsCount());
+        model.addAttribute("pre", Math.max(currentPage - 1, 0));
+        model.addAttribute("next", Math.min(currentPage + 1, (int) Math.ceil((double) essayList.size() / (double) pageSize)));
+        model.addAttribute("end", (int) Math.ceil((double) essayList.size() / (double) pageSize));
+        return "blog_list";
     }
 
     @GetMapping("/list")
     public String essaySelect(Model model) {
+        int currentPage = 0;
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
+        essayQueryRequest.setCurrentPage(currentPage);
+        essayQueryRequest.setPageSize(pageSize);
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayList", essayList);
         model.addAttribute("essayCount", essayList.size());
+        model.addAttribute("tagsCount", essayService.selectTagsCount());
+        model.addAttribute("pre", 0);
+        model.addAttribute("next", Math.min(currentPage + 1, (int) Math.ceil((double) essayList.size() / (double) pageSize)));
+        model.addAttribute("end", (int) Math.ceil((double) essayList.size() / (double) pageSize));
         return "blog_list";
     }
 
     @GetMapping("/issue")
-    public String essayIssue(Model model) {
+    public String essayIssue() {
         return "blog_issue";
     }
 
@@ -72,6 +97,15 @@ public class ThymeleafController {
         return "blog_edit";
     }
 
+    @GetMapping("/comment/delete")
+    public String deleteComment(@RequestParam("id") String commentId) {
+        Comment comment = commentService.selectById(commentId);
+        DeleteRequest deleteRequest = new DeleteRequest();
+        deleteRequest.setId(commentId);
+        Boolean result = commentService.commentDelete(deleteRequest);
+        return "redirect:/detail/" + comment.getEssayId();
+    }
+
     @GetMapping("/detail/{id}")
     public String essaySelectById(Model model, @PathVariable("id") String essayId) {
         Essay essay = essayService.essaySelectById(essayId);
@@ -79,8 +113,11 @@ public class ThymeleafController {
         User essayUser = userService.selectById(essay.getUserId());
         model.addAttribute("user", essayUser);
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
+        essayQueryRequest.setCurrentPage(0);
+        essayQueryRequest.setPageSize(pageSize);
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayCount", essayList.size());
+        model.addAttribute("tagsCount", essayService.selectTagsCount());
         CommentQueryRequest commentQueryRequest = new CommentQueryRequest();
         commentQueryRequest.setEssayId(essayId);
         List<Comment> commentList = commentService.commentSelect(commentQueryRequest);

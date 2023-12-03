@@ -146,3 +146,19 @@
     color: white;
     background: skyblue;
 }
+
+#page a {
+
+    color: #3B515E;
+
+    text-decoration: none;
+
+    padding: 10px;
+}
+
+#page {
+    /*
+    水平居中
+*/
+    text-align: center;
+}

@@ -1,9 +1,10 @@
 package com.cuit.zjq.model.dto.essay;
 
+import com.cuit.zjq.common.PageQueryRequest;
 import lombok.Data;
 
 @Data
-public class EssayQueryRequest {
+public class EssayQueryRequest  extends PageQueryRequest {
 
     /**
      * 用户id

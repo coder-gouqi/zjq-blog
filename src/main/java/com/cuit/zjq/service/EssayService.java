@@ -41,4 +41,6 @@ public interface EssayService {
      * 删除文章
      */
     Boolean essayDelete(DeleteRequest deleteRequest);
+
+    int selectTagsCount();
 }

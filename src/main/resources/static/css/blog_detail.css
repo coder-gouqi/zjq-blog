@@ -143,3 +143,23 @@ textarea:focus {
     margin-top: 20px;
     padding-bottom: 20px;
 }
+
+#commend a {
+    /*
+        水平居中
+    */
+    text-align: right;
+
+    color: red;
+
+    text-decoration: none;
+
+    /*
+        为了配合上述样式 ， 将
+        a 标签设置为块级样式
+    */
+    display: block;
+
+    padding: 10px;
+
+}

@@ -23,6 +23,8 @@ public interface EssayMapper {
     int deleteById(DeleteRequest deleteRequest);
 
     int updateById(Essay essay);
+
+    List<Essay> selectTagsCount();
 }
 
 

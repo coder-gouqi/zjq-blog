@@ -35,20 +35,9 @@
     <select id="select" resultType="com.cuit.zjq.model.domain.Essay">
         select *
         from essay
-        where is_delete=0
-        <if test="userId != null and userId!=''">
-            and user_id=#{userId}
-        </if>
-        <if test="title != null and title!=''">
-            and title like '%${title}%'
-        </if>
-        <if test="content != null and content!=''">
-            and content like '%${content}%'
-        </if>
-        <if test="tags != null and tags!=''">
-            and tags like '%${tags}%'
-        </if>
-            order by create_time
+        where is_delete = 0
+            limit #{currentPage}
+            , #{pageSize};
     </select>
 
     <select id="selectById" resultType="com.cuit.zjq.model.domain.Essay">
@@ -56,6 +45,12 @@
         from essay
         where is_delete = 0
           and id = #{id}
+    </select>
+
+    <select id="selectTagsCount" resultType="com.cuit.zjq.model.domain.Essay">
+        select distinct tags
+        from essay
+        where is_delete = 0
     </select>
 
     <update id="updateById">

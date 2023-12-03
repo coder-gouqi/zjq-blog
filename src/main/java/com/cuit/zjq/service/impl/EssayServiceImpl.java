@@ -71,6 +71,12 @@ public class EssayServiceImpl implements EssayService {
         int delete = essayMapper.deleteById(deleteRequest);
         return delete > 0;
     }
+
+    @Override
+    public int selectTagsCount() {
+        List<Essay> essays = essayMapper.selectTagsCount();
+        return essays.size();
+    }
 }
 
 
