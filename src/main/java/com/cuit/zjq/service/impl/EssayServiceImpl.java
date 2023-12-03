@@ -47,7 +47,9 @@ public class EssayServiceImpl implements EssayService {
     @Override
     public Boolean essayUpdate(EssayUpdateRequest essayUpdateRequest) {
         Essay essay = essayMapper.selectById(essayUpdateRequest.getId());
-        BeanUtil.copyProperties(essayUpdateRequest, essay);
+        essay.setTitle(essayUpdateRequest.getTitle());
+        essay.setContent(essayUpdateRequest.getContent());
+        essay.setTags(essayUpdateRequest.getTags());
         int result = essayMapper.updateById(essay);
         return result > 0;
     }

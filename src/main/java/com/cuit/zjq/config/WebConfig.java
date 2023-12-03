@@ -23,8 +23,8 @@ public class WebConfig {
         // 可访问的外部域
         config.addAllowedOrigin("*");
         // 需要跨域用户凭证（cookie、HTTP认证及客户端SSL证明等）
-        //config.setAllowCredentials(true);
-        //config.addAllowedOriginPattern("*");
+//        config.setAllowCredentials(true);
+//        config.addAllowedOriginPattern("*");
 
         // 跨域路径配置
         source.registerCorsConfiguration("/**", config);

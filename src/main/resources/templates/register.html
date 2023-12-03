@@ -8,6 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
+<!--登录会话状态-->
+<div type="hidden" id="sessionUser" th:text="${session.USER_LOGIN_STATE?.id}"></div>
 
 <!-- 导航栏 -->
 <div class="nav">

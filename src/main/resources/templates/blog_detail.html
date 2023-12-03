@@ -20,8 +20,10 @@
     <div class="spacer"></div>
 
     <button id="list" type="button">主页</button>
-    <button id="edit" type="button">写博客</button>
-    <button id="logout" type="button">注销</button>
+    <button id="issue" type="button" th:if="${session.USER_LOGIN_STATE?.id != null}">写博客</button>
+    <button id="logout" type="button" th:if="${session.USER_LOGIN_STATE?.id != null}">注销</button>
+    <button id="login" type="button" th:if="${session.USER_LOGIN_STATE?.id == null}">登录</button>
+
 </div>
 
 <!-- 页面主体部分 -->
@@ -52,7 +54,7 @@
 
         <!-- 博客标题 -->
         <h3 class="title" th:utext="${essay.title}"></h3>
-        <h4 class="title" th:utext="${essay.userId}"></h4>
+        <h4 class="title" th:utext="'作者：'+${user.userAccount}"></h4>
         <div id="essayId" th:text="${essay.id}" style="display: none"></div>
         <!-- 博客发布时间-->
         <div class="date"
@@ -61,8 +63,9 @@
         <!-- 博客正文 -->
         <div class="content">
             <p th:utext="${essay.content}"></p>
-            <button id="editEssay" type="button">编辑文章</button>
-            <button id="deleteEssay" type="button">删除文章</button>
+            <button id="editEssay" type="button" th:if="${session.USER_LOGIN_STATE?.id==essay.userId}">编辑文章</button>
+            <button id="deleteEssay" type="button" th:if="${session.USER_LOGIN_STATE?.id==essay.userId}">删除文章
+            </button>
             <br>
             <br>
             <button id="thumb">点赞</button>
@@ -88,22 +91,25 @@
 
     let host = "http://127.0.0.1:8080";
 
+    $("#login").click(function () {
+        window.location.href = host + "/";
+    })
+
     $("#list").click(function () {
         window.location.href = host + "/list";
     })
 
-    $("#edit").click(function () {
+    $("#issue").click(function () {
         let userId = document.getElementById("sessionUser").innerText
         if (userId == "") {
             alert("请先登录")
             window.location.href = host + "/";
             return
         }
-        window.location.href = host + "/edit";
+        window.location.href = host + "/issue";
     })
 
     $("#logout").click(function () {
-        let userId = document.getElementById("sessionUser").innerText
         $.ajax({
             url: host + "/user/logout", method: "post", success: function (res) {//res为返回结果
                 if (res.code == 1) {
@@ -161,14 +167,13 @@
         let essayId = document.getElementById("essayId").innerText
         if (userId == "") {
             alert("请先登录")
-            window.location.href = "http://127.0.0.1:8080/";
+            window.location.href = host + "/";
             return
         }
         let params = {
             userId: userId,
             essayId: essayId,
         }
-        let host = "http://localhost:8080"
         $.ajax({
             url: host + "/thumb/update",
             method: "post",
@@ -179,7 +184,7 @@
             },
             error: function () {//运行错误会执行此方法
                 alert("点赞失败")
-                window.location.href = "http://127.0.0.1:8080/403";
+                window.location.href = host + "/403";
             }
         })
     })
@@ -188,14 +193,13 @@
         let essayId = document.getElementById("essayId").innerText
         if (userId == "") {
             alert("请先登录")
-            window.location.href = "http://127.0.0.1:8080/";
+            window.location.href = host + "/";
             return
         }
         let params = {
             userId: userId,
             essayId: essayId,
         }
-        let host = "http://localhost:8080"
         $.ajax({
             url: host + "/forward/update",
             method: "post",
@@ -206,7 +210,7 @@
             },
             error: function () {//运行错误会执行此方法
                 alert("转发失败")
-                window.location.href = "http://127.0.0.1:8080/403";
+                window.location.href = host + "/403";
             }
         })
     })
@@ -215,14 +219,13 @@
         let essayId = document.getElementById("essayId").innerText
         if (userId == "") {
             alert("请先登录")
-            window.location.href = "http://127.0.0.1:8080/";
+            window.location.href = host + "/";
             return
         }
         let params = {
             userId: userId,
             essayId: essayId,
         }
-        let host = "http://localhost:8080"
         $.ajax({
             url: host + "/favour/update",
             method: "post",
@@ -238,55 +241,27 @@
             //运行错误会执行此方法
             error: function () {
                 alert("收藏失败")
-                window.location.href = "http://127.0.0.1:8080/403";
+                window.location.href = host + "/403";
             }
         })
     })
 
     $("#editEssay").click(function () {
-        let userId = document.getElementById("sessionUser").innerText
         let essayId = document.getElementById("essayId").innerText
-        if (userId == "") {
-            alert("请先登录")
-            window.location.href = "http://127.0.0.1:8080/";
-            return
-        }
-        let params = {
-            id: essayId,
-        }
-        let host = "http://localhost:8080"
-        $.ajax({
-            url: host + "/essay/edit",
-            method: "post",
-            data: JSON.stringify(params),
-            contentType: 'application/json',
-            // res为返回结果
-            success: function (res) {
-                if (res.code == 1) {
-                    alert("编辑成功")
-                } else {
-                    alert("编辑失败")
-                }
-            },
-            // 运行错误会执行此方法
-            error: function () {
-                alert("编辑失败")
-                window.location.href = "http://127.0.0.1:8080/403";
-            }
-        })
+        window.location.href = host + "/edit?id=" + essayId;
     })
+
     $("#deleteEssay").click(function () {
         let userId = document.getElementById("sessionUser").innerText
         let essayId = document.getElementById("essayId").innerText
         if (userId == "") {
             alert("请先登录")
-            window.location.href = "http://127.0.0.1:8080/";
+            window.location.href = host + "/";
             return
         }
         let params = {
             id: essayId,
         }
-        let host = "http://localhost:8080"
         $.ajax({
             url: host + "/essay/delete",
             method: "post",
@@ -296,7 +271,7 @@
             success: function (res) {
                 if (res.code == 1) {
                     alert("删除成功")
-                    window.location.href = "http://127.0.0.1:8080/list";
+                    window.location.href = host + "/list";
                 } else {
                     alert("删除失败")
                 }
@@ -304,7 +279,7 @@
             // 运行错误会执行此方法
             error: function () {
                 alert("删除失败")
-                window.location.href = "http://127.0.0.1:8080/403";
+                window.location.href = host + "/403";
             }
         })
     })

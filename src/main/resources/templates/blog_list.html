@@ -20,8 +20,9 @@
     <div class="spacer"></div>
 
     <button id="list" type="button">主页</button>
-    <button id="edit" type="button">写博客</button>
-    <button id="logout" type="button">注销</button>
+    <button id="issue" type="button" th:if="${session.USER_LOGIN_STATE?.id != null}">写博客</button>
+    <button id="login" type="button" th:if="${session.USER_LOGIN_STATE?.id == null } ">登录</button>
+        <button id="logout" type="button" th:if="${session.USER_LOGIN_STATE?.id != null} ">注销</button>
 </div>
 
 <!-- 页面主体部分 -->
@@ -30,7 +31,7 @@
 
     <div class="container-left">
 
-        <!--        使用 这个 .card 表示用户信息-->
+        <!--使用 这个 .card 表示用户信息-->
         <div class="card">
             <img th:src="@{/image/avatar.jpg}" alt="图片显示失败">
             <!--            用户名-->
@@ -80,26 +81,25 @@
 
     let host = "http://127.0.0.1:8080";
 
+    $("#login").click(function () {
+        window.location.href = host + "/";
+    })
+
     $("#list").click(function () {
         window.location.href = host + "/list";
     })
 
-    $("#edit").click(function () {
+    $("#issue").click(function () {
         let userId = document.getElementById("sessionUser").innerText
         if (userId == "") {
             alert("请先登录")
             window.location.href = host + "/";
             return
         }
-        window.location.href = host + "/edit";
+        window.location.href = host + "/issue";
     })
 
     $("#logout").click(function () {
-        let userId = document.getElementById("sessionUser").innerText
-        if (userId != "") {
-            alert("注销失败")
-            return
-        }
         $.ajax({
             url: host + "/user/logout", method: "post", success: function (res) {//res为返回结果
                 if (res.code == 1) {

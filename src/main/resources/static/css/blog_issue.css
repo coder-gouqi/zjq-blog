@@ -2,7 +2,7 @@
     这个文件用来写博客编辑页的样式
 */
 
-.blog-edit-container {
+.blog-issue-container {
     width: 1000px;
     height: calc(100% - 50px);
     /*
@@ -11,7 +11,7 @@
     margin: 0 auto;
 }
 
-.blog-edit-container .title {
+.blog-issue-container .title {
 
     height: 50px;
 
@@ -111,7 +111,7 @@
     background-color: rgb(255, 255, 255);
 }
 
-#saveEssay {
+#submit {
     height: 40px;
     width: 100px;
     color: white;
@@ -128,7 +128,7 @@
     border-radius: 10px;
 }
 
-#saveEssay:active {
+#submit:active {
     background-color: skyblue;
 }
 

@@ -46,4 +46,6 @@ public interface UserService {
 
 
     List<User> selectUser();
+
+    User selectById(String id);
 }

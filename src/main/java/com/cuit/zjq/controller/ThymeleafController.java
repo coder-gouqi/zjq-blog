@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -53,9 +54,9 @@ public class ThymeleafController {
         return "blog_list";
     }
 
-    @GetMapping("/edit")
-    public String essayAdd(Model model) {
-        return "blog_edit";
+    @GetMapping("/issue")
+    public String essayIssue(Model model) {
+        return "blog_issue";
     }
 
     @GetMapping("/logout")
@@ -64,10 +65,19 @@ public class ThymeleafController {
         return "login";
     }
 
+    @GetMapping("/edit")
+    public String essayEdit(Model model, @RequestParam("id") String essayId) {
+        Essay essay = essayService.essaySelectById(essayId);
+        model.addAttribute("essay", essay);
+        return "blog_edit";
+    }
+
     @GetMapping("/detail/{id}")
     public String essaySelectById(Model model, @PathVariable("id") String essayId) {
         Essay essay = essayService.essaySelectById(essayId);
         model.addAttribute("essay", essay);
+        User essayUser = userService.selectById(essay.getUserId());
+        model.addAttribute("user", essayUser);
         EssayQueryRequest essayQueryRequest = new EssayQueryRequest();
         List<Essay> essayList = essayService.essaySelect(essayQueryRequest);
         model.addAttribute("essayCount", essayList.size());
