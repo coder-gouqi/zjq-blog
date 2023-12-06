@@ -13,6 +13,8 @@ import com.cuit.zjq.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +31,10 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = new Comment();
         BeanUtil.copyProperties(commentAddRequest, comment);
         String id = UUID.randomUUID().toString().replace("-", "");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         comment.setId(id);
         comment.setIsDelete(0);
+        comment.setCreateTime(sdf.format(new Date()));
         int insert = commentMapper.insert(comment);
         return insert > 0;
     }
